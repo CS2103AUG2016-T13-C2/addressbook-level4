@@ -7,9 +7,9 @@ import seedu.address.commons.util.DateValidation;
  * Represents a Task's DueDate in the Lifekeeper.
  * Guarantees: immutable; is valid as declared in {@link #isValidDueDate(String)}
  */
-public class DueDate {
+public class StartDate {
 
-    public static final String MESSAGE_DUEDATE_CONSTRAINTS = "Task's DueDate should only contain valid date";
+    public static final String MESSAGE_STARTDATE_CONSTRAINTS = "Task's StartDate should only contain valid date";
 
     public final String value;
 
@@ -18,15 +18,15 @@ public class DueDate {
      *
      * @throws IllegalValueException if given due date string is invalid.
      */
-    public DueDate(String date) throws IllegalValueException {
+    public StartDate(String date) throws IllegalValueException {
         assert date != null;
         if (date.equals("today"))
             date = DateValidation.TodayDate();
         else if (date == "tomorrow")
             date = DateValidation.TomorrowDate();
     /*
-     * if (!isValidDueDate(date)) { throw new
-     * IllegalValueException(MESSAGE_DUEDATE_CONSTRAINTS); }
+     * if (!isValidStartDate(date)) { throw new
+     * IllegalValueException(MESSAGE_REMINDER_CONSTRAINTS); }
      */
         this.value = date;
     }
@@ -34,7 +34,7 @@ public class DueDate {
     /**
      * Returns true if a given string is a valid person phone number.
      */
-    public static boolean isValidDueDate(String test) {
+    public static boolean isValidStartDate(String test) {
         if ((DateValidation.validate(test)))
             return true;
         else

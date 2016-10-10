@@ -4,6 +4,7 @@ import seedu.address.commons.util.CollectionUtil;
 import seedu.address.model.tag.UniqueTagList;
 
 import java.util.Objects;
+import java.util.Set;
 
 /**
  * Represents a Task in the Lifekeeper.
@@ -12,6 +13,7 @@ import java.util.Objects;
 public class Task implements ReadOnlyTask {
 
     private TaskName name;
+    private StartDate startdate;
     private DueDate duedate;
     private Priority priority;
     private Reminder reminder;
@@ -21,12 +23,20 @@ public class Task implements ReadOnlyTask {
     /**
      * Every field must be present and not null.
      */
-    public Task(TaskName name, DueDate phone, Priority email, Reminder address, UniqueTagList tags) {
-        assert !CollectionUtil.isAnyNull(name, phone, email, address, tags);
+    public Task(TaskName name, DueDate duedate, Priority priority, Reminder reminder, UniqueTagList tags) {
+        assert !CollectionUtil.isAnyNull(name, duedate, priority, reminder, tags);
         this.name = name;
-        this.duedate = phone;
-        this.priority = email;
-        this.reminder = address;
+        this.duedate = duedate;
+        this.priority = priority;
+        this.reminder = reminder;
+        this.tags = new UniqueTagList(tags); // protect internal tags from changes in the arg list
+    }
+    
+    public Task(TaskName name, StartDate startdate, DueDate duedate, UniqueTagList tags) {
+        assert !CollectionUtil.isAnyNull(name, startdate, duedate, tags);
+        this.name = name;
+        this.startdate = startdate;
+        this.duedate = duedate;
         this.tags = new UniqueTagList(tags); // protect internal tags from changes in the arg list
     }
 
