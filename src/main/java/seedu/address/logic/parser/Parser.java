@@ -33,12 +33,15 @@ public class Parser {
                     + " (?<isReminderPrivate>p?)r/(?<reminder>[^/]+)"
                     + "(?<tagArguments>(?: t/[^/]+)*)"); // variable number of tags
     
-    private static final Pattern PERSON_DATA_ARGS_FORMAT1 = // '/' forward slashes are reserved for delimiter prefixes
+    /*private static final Pattern PERSON_DATA_ARGS_FORMAT1 = // '/' forward slashes are reserved for delimiter prefixes
             Pattern.compile("(?<task>[^/]+)"
                     + " (?<isStartDatePrivate>p?)s/(?<startdate>[^/]+)"
                     + " (?<isDueDatePrivate>p?)p/(?<duedate>[^/]+)"
                     + "(?<tagArguments>(?: t/[^/]+)*)"); // variable number of tags
-
+*/
+    private static final Pattern PERSON_DATA_ARGS_FORMAT2 = // '/' forward slashes are reserved for delimiter prefixes
+            Pattern.compile("(?<task>[^/]+)");
+            
     public Parser() {}
 
     /**
@@ -94,6 +97,7 @@ public class Parser {
      */
     private Command prepareAdd(String args){
         final Matcher matcher = PERSON_DATA_ARGS_FORMAT.matcher(args.trim());
+        final Matcher matcher2 = PERSON_DATA_ARGS_FORMAT2.matcher(args.trim());
         //final Matcher matcher1 = PERSON_DATA_ARGS_FORMAT1.matcher(args.trim());
         // Validate arg string format
         /*if (!matcher.matches()) {
@@ -109,11 +113,16 @@ public class Parser {
             } catch (IllegalValueException ive) {
                 return new IncorrectCommand(ive.getMessage());  
         }
-*/       
-        if(!matcher.matches()){
+        */      
+        try{
+            if(matcher2.matches())
+            return new AddCommand(
+                    matcher.group("task")
+                    );
+        else if(!matcher.matches()){
                 return new IncorrectCommand(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_USAGE));
         }
-         try {
+
             return new AddCommand(
                     matcher.group("task"),
                     matcher.group("duedate"),

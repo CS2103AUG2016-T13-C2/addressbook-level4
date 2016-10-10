@@ -44,6 +44,13 @@ public class AddCommand extends Command {
                 new UniqueTagList(tagSet)
         );
     }
+    
+    public AddCommand(String name)
+            throws IllegalValueException {
+        this.toAdd = new Task(
+                new TaskName(name)
+        );
+    }
 
     public AddCommand(String name, String startdate, String duedate, Set<String> tags)
             throws IllegalValueException {

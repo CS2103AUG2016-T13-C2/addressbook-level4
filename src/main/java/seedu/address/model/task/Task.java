@@ -39,6 +39,11 @@ public class Task implements ReadOnlyTask {
         this.duedate = duedate;
         this.tags = new UniqueTagList(tags); // protect internal tags from changes in the arg list
     }
+    
+    public Task(TaskName name) {
+        assert !CollectionUtil.isAnyNull(name);
+        this.name = name;
+        }
 
     /**
      * Copy constructor.
