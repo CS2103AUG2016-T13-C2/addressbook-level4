@@ -99,6 +99,13 @@ public abstract class AddressBookGuiTest {
     public void assertMatching(ReadOnlyTask person, PersonCardHandle card) {
         assertTrue(TestUtil.compareCardAndPerson(card, person));
     }
+    
+    /**
+     * Asserts the two tasks are exactly the same, by checking each of the attributes of both person. 
+     */
+    protected void assertSameTask(ReadOnlyTask commandBoxResult, ReadOnlyTask expectedResult) {
+    	assertTrue(commandBoxResult.isSameStateAs(expectedResult));
+    }
 
     /**
      * Asserts the size of the person list is equal to the given number.

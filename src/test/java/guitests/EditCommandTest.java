@@ -6,6 +6,7 @@ import static seedu.address.logic.commands.DeleteCommand.MESSAGE_DELETE_TASK_SUC
 import org.junit.Test;
 
 import seedu.address.commons.core.Messages;
+import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.logic.commands.AddCommand;
 import seedu.address.logic.commands.EditCommand;
 import seedu.address.model.tag.UniqueTagList;
@@ -50,18 +51,29 @@ public class EditCommandTest extends AddressBookGuiTest {
 	private void assertEditSuccess(int targetIndexOneIndexed, final TestPerson[] currentList) {
         TestPerson taskToEdit = currentList[targetIndexOneIndexed-1]; //-1 because array uses zero indexing
         
-        //i am still unsure how to initialise the tags.
-        TestPerson expectedResult = TestUtil.editPersonAttributes(taskToEdit, new TaskName("CS2103 T7A1 "), new Reminder("05-01-2016"), new Priority("1"), new DueDate("06-10-2016"));
-        
-        //i am thinking that commandBox is a virtual CLI that takes in sample user input and outputs results in a test environment
-        commandBox.runCommand("edit " + targetIndexOneIndexed);
-        //not sure of what is the exact input format for edit.
-        commandBox.runCommand("CS2103 T7A1 d/06-10-2016 p/1 r/05-01-2016 t/CS t/groupwork");
 
-        //confirm if both tasks are exactly the same
-        assertEquals(currentList[targetIndexOneIndexed-1], expectedResult);
+        try {
+            //i am still unsure how to initialise the tags.
+            TestPerson expectedResult = TestUtil.editPersonAttributes(taskToEdit, 
+        	    	new TaskName("CS2103 T7A1 "), 
+        	    	new Reminder("05-01-2016"), 
+        	    	new Priority("1"), 
+        	    	new DueDate("06-10-2016")
+        	    	);
+            
+            commandBox.runCommand("edit " + targetIndexOneIndexed);
+            commandBox.runCommand("CS2103 T7A1 d/06-10-2016 p/1 r/05-01-2016");
 
-        //confirm the result message is correct
+            //confirm if both tasks are exactly the same
+            assertSameTask(currentList[targetIndexOneIndexed-1], expectedResult);
+            
+            //confirm the result message is correct
+            
+        } catch (IllegalValueException ive) {
+        	//probably do a logging to make it clear that edit test has failed due to IllegalValueException
+        }
 
     }
+	
+	
 }
