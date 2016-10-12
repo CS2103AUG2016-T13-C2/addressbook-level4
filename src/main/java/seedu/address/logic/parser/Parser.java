@@ -40,8 +40,9 @@ public class Parser {
                     + "(?<tagArguments>(?: t/[^/]+)*)"); // variable number of tags
 */
     private static final Pattern PERSON_DATA_ARGS_FORMAT2 = // '/' forward slashes are reserved for delimiter prefixes
-            Pattern.compile("(?<task>[^/]+)");
-            
+            Pattern.compile("(?<task>[^/]+)"
+                    + "(?<tagArguments>(?: t/[^/]+)*)"); // variable number of tags
+    
     public Parser() {}
 
     /**
@@ -117,7 +118,8 @@ public class Parser {
         try{
             if(matcher2.matches())
             return new AddCommand(
-                    matcher2.group("task")
+                    matcher2.group("task"),
+                    getTagsFromArgs(matcher2.group("tagArguments"))
                     );
         else if(!matcher.matches()){
                 return new IncorrectCommand(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_USAGE));

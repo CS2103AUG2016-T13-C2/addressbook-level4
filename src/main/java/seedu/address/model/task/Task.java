@@ -40,9 +40,14 @@ public class Task implements ReadOnlyTask {
         this.tags = new UniqueTagList(tags); // protect internal tags from changes in the arg list
     }
     
-    public Task(TaskName name) {
+    public Task(TaskName name, UniqueTagList tags) {
         assert !CollectionUtil.isAnyNull(name);
         this.name = name;
+        this.tags = new UniqueTagList(tags);
+        startdate = null;
+        duedate = null;
+        priority = null;
+        reminder = null;
         }
 
     /**

@@ -11,7 +11,7 @@ public class DueDate {
 
     public static final String MESSAGE_DUEDATE_CONSTRAINTS = "Task's DueDate should only contain valid date";
 
-    public final String value;
+    public String value;
 
     /**
      * Validates given Due Date.

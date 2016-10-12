@@ -26,9 +26,9 @@ public interface ReadOnlyTask {
         return other == this // short circuit if same object
                 || (other != null // this is first to avoid NPE below
                 && other.getName().equals(this.getName()) // state checks here onwards
-                && other.getDueDate().equals(this.getDueDate())
-                && other.getPriority().equals(this.getPriority())
-                && other.getReminder().equals(this.getReminder()));
+                || other.getDueDate().equals(this.getDueDate())
+                || other.getPriority().equals(this.getPriority())
+                || other.getReminder().equals(this.getReminder()));
     }
 
     /**
