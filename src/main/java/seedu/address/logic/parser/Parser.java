@@ -117,7 +117,7 @@ public class Parser {
         try{
             if(matcher2.matches())
             return new AddCommand(
-                    matcher.group("task")
+                    matcher2.group("task")
                     );
         else if(!matcher.matches()){
                 return new IncorrectCommand(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_USAGE));
