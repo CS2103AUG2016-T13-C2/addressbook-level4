@@ -31,7 +31,7 @@ public class AddCommandTest extends AddressBookGuiTest {
 
         //add to empty list
         commandBox.runCommand("clear");
-        assertAddSuccess(td.alice);
+        assertAddSuccess(td.finishIE3101Revision);
 
         //invalid command
         commandBox.runCommand("adds Johnny");
@@ -49,5 +49,8 @@ public class AddCommandTest extends AddressBookGuiTest {
         TestTask[] expectedList = TestUtil.addTasksToList(currentList, taskToAdd);
         assertTrue(taskListPanel.isListMatching(expectedList));
     }
-
+    /*
+     * private void assertAddFailure(TestTask)
+     */
+    
 }

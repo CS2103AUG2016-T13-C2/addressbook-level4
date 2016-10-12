@@ -9,25 +9,28 @@ import seedu.address.model.task.*;
  */
 public class TypicalTestTasks {
 
-    public static TestTask alice, benson, carl, daniel, elle, fiona, george, hoon, ida;
+    public static TestTask finishIE3101Revision, finishCS2103Project, planTaiwanTrip, daniel, elle, fiona, george, hoon, ida;
 
     public TypicalTestTasks() {
         try {
-            alice =  new TaskBuilder().withTaskName("Alice Pauline").withReminder("123, Jurong West Ave 6, #08-111")
-                    .withPriority("alice@gmail.com").withDueDate("85355255")
-                    .withTags("friends").build();
-            benson = new TaskBuilder().withTaskName("Benson Meier").withReminder("311, Clementi Ave 2, #02-25")
-                    .withPriority("johnd@gmail.com").withDueDate("98765432")
-                    .withTags("owesMoney", "friends").build();
-            carl = new TaskBuilder().withTaskName("Carl Kurz").withDueDate("95352563").withPriority("heinz@yahoo.com").withReminder("wall street").build();
-            daniel = new TaskBuilder().withTaskName("Daniel Meier").withDueDate("87652533").withPriority("cornelia@google.com").withReminder("10th street").build();
-            elle = new TaskBuilder().withTaskName("Elle Meyer").withDueDate("9482224").withPriority("werner@gmail.com").withReminder("michegan ave").build();
-            fiona = new TaskBuilder().withTaskName("Fiona Kunz").withDueDate("9482427").withPriority("lydia@gmail.com").withReminder("little tokyo").build();
-            george = new TaskBuilder().withTaskName("George Best").withDueDate("9482442").withPriority("anna@google.com").withReminder("4th street").build();
+            finishIE3101Revision =  new TaskBuilder().withTaskName("Complete IE3101 Revision").withReminder("20-11-2016")
+                    .withPriority("1").withDueDate("20-12-2016")
+                    .withTags("tedious").build();
+            finishCS2103Project = new TaskBuilder().withTaskName("Finish CS2103 Project").withReminder("31-11-2016")
+                    .withPriority("3").withDueDate("31-12-2016")
+                    .withTags("difficult", "urgent").build();
+            planTaiwanTrip = new TaskBuilder().withTaskName("Plan for Taiwan Trip").withDueDate("31-11-2016").withPriority("0").withReminder("20-11-2016").withTags("tedious").build();
+            daniel = new TaskBuilder().withTaskName("Daniel Meier").withDueDate("31-11-2016").withPriority("1").withReminder("20-11-2017").withTags("tedious").build();
+            elle = new TaskBuilder().withTaskName("Elle Meyer").withDueDate("31-11-2016").withPriority("2").withReminder("20-12-2016").withTags("tedious").build();
+            fiona = new TaskBuilder().withTaskName("Fiona Kunz").withDueDate("31-11-2016").withPriority("3").withReminder("28-11-2016").withTags("tedious").build();
+            george = new TaskBuilder().withTaskName("George Best").withDueDate("31-11-2016").withPriority("0").withReminder("20-11-2016").withTags("tedious").build();
 
             //Manually added
             hoon = new TaskBuilder().withTaskName("Hoon Meier").withDueDate("8482424").withPriority("stefan@mail.com").withReminder("little india").build();
             ida = new TaskBuilder().withTaskName("Ida Mueller").withDueDate("8482131").withPriority("hans@google.com").withReminder("chicago ave").build();
+            //wrongDueDateTestCase = new TaskBuilder().withTaskName("wrongDueDateTestCase").withReminder("20-11-2016").withPriority("1").withDueDate("20-40-2016").withPriority("0").withReminder("20-11-2016").build();
+            //wrongReminderTestCase = new TaskBuilder().withTaskName("wrongDueDateTestCase").withReminder("55-11-2016").withPriority("1").withDueDate("20-12-2016").withPriority("0").withReminder("20-11-2016").build();
+            //wrongPriorityTestCase = new TaskBuilder().withTaskName("wrongDueDateTestCase").withReminder("55-11-2016").withPriority("1").withDueDate("20-12-2016").withPriority("0").withReminder("20-11-2016").build();
         } catch (IllegalValueException e) {
             e.printStackTrace();
             assert false : "not possible";
@@ -37,9 +40,9 @@ public class TypicalTestTasks {
     public static void loadAddressBookWithSampleData(AddressBook ab) {
 
         try {
-            ab.addTask(new Task(alice));
-            ab.addTask(new Task(benson));
-            ab.addTask(new Task(carl));
+            ab.addTask(new Task(finishIE3101Revision));
+            ab.addTask(new Task(finishCS2103Project));
+            ab.addTask(new Task(planTaiwanTrip));
             ab.addTask(new Task(daniel));
             ab.addTask(new Task(elle));
             ab.addTask(new Task(fiona));
@@ -50,7 +53,7 @@ public class TypicalTestTasks {
     }
 
     public TestTask[] getTypicalTasks() {
-        return new TestTask[]{alice, benson, carl, daniel, elle, fiona, george};
+        return new TestTask[]{finishIE3101Revision, finishCS2103Project, planTaiwanTrip, daniel, elle, fiona, george};
     }
 
     public AddressBook getTypicalAddressBook(){
