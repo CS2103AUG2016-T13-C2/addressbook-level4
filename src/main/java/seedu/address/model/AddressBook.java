@@ -76,7 +76,7 @@ public class AddressBook implements ReadOnlyLifeKeeper {
      *
      * @throws UniqueTaskList.DuplicateTaskException if an equivalent person already exists.
      */
-    public void addPerson(Task p) throws UniqueTaskList.DuplicateTaskException {
+    public void addTask(Task p) throws UniqueTaskList.DuplicateTaskException {
         syncTagsWithMasterList(p);
         tasks.add(p);
     }

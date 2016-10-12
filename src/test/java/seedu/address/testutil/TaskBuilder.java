@@ -7,43 +7,43 @@ import seedu.address.model.task.*;
 /**
  *
  */
-public class PersonBuilder {
+public class TaskBuilder {
 
-    private TestPerson person;
+    private TestTask task;
 
-    public PersonBuilder() {
-        this.person = new TestPerson();
+    public TaskBuilder() {
+        this.task = new TestTask();
     }
 
-    public PersonBuilder withName(String name) throws IllegalValueException {
-        this.person.setName(new TaskName(name));
+    public TaskBuilder withTaskName(String name) throws IllegalValueException {
+        this.task.setName(new TaskName(name));
         return this;
     }
 
-    public PersonBuilder withTags(String ... tags) throws IllegalValueException {
+    public TaskBuilder withTags(String ... tags) throws IllegalValueException {
         for (String tag: tags) {
-            person.getTags().add(new Tag(tag));
+            task.getTags().add(new Tag(tag));
         }
         return this;
     }
 
-    public PersonBuilder withAddress(String address) throws IllegalValueException {
-        this.person.setAddress(new Reminder(address));
+    public TaskBuilder withReminder(String address) throws IllegalValueException {
+        this.task.setAddress(new Reminder(address));
         return this;
     }
 
-    public PersonBuilder withPhone(String phone) throws IllegalValueException {
-        this.person.setPhone(new DueDate(phone));
+    public TaskBuilder withDueDate(String phone) throws IllegalValueException {
+        this.task.setPhone(new DueDate(phone));
         return this;
     }
 
-    public PersonBuilder withEmail(String email) throws IllegalValueException {
-        this.person.setEmail(new Priority(email));
+    public TaskBuilder withPriority(String email) throws IllegalValueException {
+        this.task.setEmail(new Priority(email));
         return this;
     }
 
-    public TestPerson build() {
-        return this.person;
+    public TestTask build() {
+        return this.task;
     }
 
 }
