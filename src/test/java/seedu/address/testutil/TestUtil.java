@@ -22,6 +22,7 @@ import seedu.address.model.tag.UniqueTagList;
 import seedu.address.model.task.*;
 import seedu.address.storage.XmlSerializableAddressBook;
 
+
 import java.io.File;
 import java.io.IOException;
 import java.lang.reflect.Field;
@@ -317,6 +318,23 @@ public class TestUtil {
         listOfPersons.addAll(asList(personsToAdd));
         return listOfPersons.toArray(new TestPerson[listOfPersons.size()]);
     }
+    
+    /**
+     * Changes the attributes of a person.
+     * @param person to edit, task name and priority setting.
+     * @return TestPerson with modified details.
+     */
+    
+    public static TestPerson editPersonAttributes(final TestPerson person, TaskName name, Reminder address, Priority email, DueDate phone) {
+    	// I am still unsure how to incorporate tag list into testing.
+    	person.setName(name);
+    	person.setAddress(address);
+    	person.setEmail(email);
+    	person.setPhone(phone);
+    	
+    	return person;
+    }
+    
 
     private static <T> List<T> asList(T[] objs) {
         List<T> list = new ArrayList<>();
