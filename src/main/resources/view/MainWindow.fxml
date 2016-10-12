@@ -17,6 +17,13 @@
                   <MenuItem mnemonicParsing="false" onAction="#handleExit" text="Exit" />
                </items>
             </Menu>
+            
+            <Menu mnemonicParsing="false" text="Set Storage Directory">
+                <items>
+                   <MenuItem mnemonicParsing="false" onAction="#handleChangeDirectory" text="Change Directory" />
+                </items>
+            </Menu>
+            
             <Menu mnemonicParsing="false" text="Help">
                <items>
                   <MenuItem fx:id="helpMenuItem" mnemonicParsing="false" onAction="#handleHelp" text="Help" />

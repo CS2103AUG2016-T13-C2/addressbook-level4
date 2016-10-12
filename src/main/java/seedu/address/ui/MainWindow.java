@@ -10,6 +10,7 @@ import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import seedu.address.commons.core.Config;
 import seedu.address.commons.core.GuiSettings;
+import seedu.address.commons.events.ui.ChangeStorageDirectoryEvent;
 import seedu.address.commons.events.ui.ExitAppRequestEvent;
 import seedu.address.logic.Logic;
 import seedu.address.model.UserPrefs;
@@ -192,5 +193,13 @@ public class MainWindow extends UiPart {
 
     public void releaseResources() {
         browserPanel.freeResources();
+    }
+    
+    /**
+     * Changes the file directory of the StorageFile
+     */
+    
+    public void handleChangeDirectory() {
+    	raise(new ChangeStorageDirectoryEvent());
     }
 }
