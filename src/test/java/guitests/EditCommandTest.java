@@ -22,7 +22,7 @@ public class EditCommandTest extends AddressBookGuiTest {
 
     @Test
     /**
-     * Assumptions: there is at least one task already in TypicalTestPersons.
+     * Assumptions: there is at least one task already in TypicalTestTasks.
      */
     public void edit() {
         TestTask[] currentList = td.getTypicalTasks();
@@ -33,7 +33,7 @@ public class EditCommandTest extends AddressBookGuiTest {
     	
         //invalid index
         commandBox.runCommand("edit " + currentList.length + 1);
-        assertResultMessage("The person index provided is invalid");
+        assertResultMessage("The task index provided is invalid");
         
     	//invalid command
         commandBox.runCommand("edits Johnny");
@@ -62,7 +62,7 @@ public class EditCommandTest extends AddressBookGuiTest {
         	    	);
             
             commandBox.runCommand("edit " + targetIndexOneIndexed);
-            commandBox.runCommand("CS2103 T7A1 d/06-10-2016 p/1 r/05-01-2016");
+            commandBox.runCommand("n/CS2103 T7A1 d/06-10-2016 14:00 p/3 r/05-01-2016 14:00");
 
             //confirm if both tasks are exactly the same
             assertSameTask(currentList[targetIndexOneIndexed-1], expectedResult);
