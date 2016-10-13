@@ -13,11 +13,11 @@ public class TypicalTestTasks {
 
     public TypicalTestTasks() {
         try {
-            finishIE3101Revision =  new TaskBuilder().withTaskName("Complete IE3101 Revision").withReminder("20-11-2016")
-                    .withPriority("1").withDueDate("20-12-2016")
+            finishIE3101Revision =  new TaskBuilder().withTaskName("Complete IE3101 Revision").withReminder("20-11-2016 14:00")
+                    .withPriority("1").withDueDate("20-12-2016 14:00")
                     .withTags("tedious").build();
-            finishCS2103Project = new TaskBuilder().withTaskName("Finish CS2103 Project").withReminder("31-11-2016")
-                    .withPriority("3").withDueDate("31-12-2016")
+            finishCS2103Project = new TaskBuilder().withTaskName("Finish CS2103 Project").withReminder("31-11-2016 14:00")
+                    .withPriority("3").withDueDate("31-12-2016 14:00")
                     .withTags("difficult", "urgent").build();
             planTaiwanTrip = new TaskBuilder().withTaskName("Plan for Taiwan Trip").withDueDate("31-12-2016").withPriority("0").withReminder("20-11-2016").withTags("tedious").build();
             daniel = new TaskBuilder().withTaskName("Daniel Meier").withDueDate("31-11-2016").withPriority("1").withReminder("20-11-2017").withTags("tedious").build();
