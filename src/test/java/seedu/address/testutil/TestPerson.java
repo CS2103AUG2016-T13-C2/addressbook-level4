@@ -10,8 +10,10 @@ public class TestPerson implements ReadOnlyTask {
 
     private TaskName name;
     private Reminder address;
+    private ReminderTime remindertime;
     private Priority email;
     private DueDate phone;
+    private DueTime duetime;
     private UniqueTagList tags;
 
     public TestPerson() {
@@ -43,6 +45,11 @@ public class TestPerson implements ReadOnlyTask {
     public DueDate getDueDate() {
         return phone;
     }
+    
+    @Override
+    public DueTime getDueTime() {
+        return duetime;
+    }
 
     @Override
     public Priority getPriority() {
@@ -54,6 +61,11 @@ public class TestPerson implements ReadOnlyTask {
         return address;
     }
 
+    @Override
+    public ReminderTime getReminderTime() {
+        return remindertime;
+    }
+    
     @Override
     public UniqueTagList getTags() {
         return tags;

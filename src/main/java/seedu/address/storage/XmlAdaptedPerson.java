@@ -22,6 +22,10 @@ public class XmlAdaptedPerson {
     private String email;
     @XmlElement(required = true)
     private String address;
+    @XmlElement(required = true)
+    private String duetime;
+    @XmlElement(required = true)
+    private String remindertime;
 
     @XmlElement
     private List<XmlAdaptedTag> tagged = new ArrayList<>();
@@ -40,8 +44,10 @@ public class XmlAdaptedPerson {
     public XmlAdaptedPerson(ReadOnlyTask source) {
         name = source.getName().fullName;
         phone = source.getDueDate().value;
+        duetime = source.getDueTime().value;
         email = source.getPriority().value;
         address = source.getReminder().value;
+        remindertime = source.getReminderTime().value;
         tagged = new ArrayList<>();
         for (Tag tag : source.getTags()) {
             tagged.add(new XmlAdaptedTag(tag));
@@ -60,9 +66,11 @@ public class XmlAdaptedPerson {
         }
         final TaskName name = new TaskName(this.name);
         final DueDate phone = new DueDate(this.phone);
+        final DueTime duetime = new DueTime(this.duetime);
         final Priority email = new Priority(this.email);
         final Reminder address = new Reminder(this.address);
+        final ReminderTime remindertime = new ReminderTime(this.remindertime);
         final UniqueTagList tags = new UniqueTagList(personTags);
-        return new Task(name, phone, email, address, tags);
+        return new Task(name, phone, duetime, email, address, remindertime, tags);
     }
 }

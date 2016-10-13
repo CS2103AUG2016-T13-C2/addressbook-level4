@@ -20,6 +20,7 @@ import seedu.address.model.tag.UniqueTagList;
 import seedu.address.model.task.*;
 import seedu.address.storage.StorageManager;
 
+import java.sql.Time;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
@@ -384,13 +385,15 @@ public class LogicManagerTest {
 
         Task adam() throws Exception {
             TaskName name = new TaskName("Adam Brown");
-            DueDate privatePhone = new DueDate("111111");
-            Priority email = new Priority("adam@gmail.com");
-            Reminder privateAddress = new Reminder("111, alpha street");
+            DueDate privatePhone = new DueDate("11-11-2017");
+            DueTime privateDuetime = new DueTime("12:10");
+            Priority email = new Priority("1");
+            Reminder privateAddress = new Reminder("11-11-2017");
+            ReminderTime privateremindertime = new ReminderTime("12:00");
             Tag tag1 = new Tag("tag1");
             Tag tag2 = new Tag("tag2");
             UniqueTagList tags = new UniqueTagList(tag1, tag2);
-            return new Task(name, privatePhone, email, privateAddress, tags);
+            return new Task(name, privatePhone,privateDuetime, email, privateAddress, privateremindertime, tags);
         }
 
         /**
@@ -404,8 +407,10 @@ public class LogicManagerTest {
             return new Task(
                     new TaskName("Person " + seed),
                     new DueDate("" + Math.abs(seed)),
+                    new DueTime("" + Math.abs(seed)),
                     new Priority(seed + "@email"),
                     new Reminder("House of " + seed),
+                    new ReminderTime("House of " + seed),
                     new UniqueTagList(new Tag("tag" + Math.abs(seed)), new Tag("tag" + Math.abs(seed + 1)))
             );
         }
@@ -417,9 +422,11 @@ public class LogicManagerTest {
             cmd.append("add ");
 
             cmd.append(p.getName().toString());
-            cmd.append(" p/").append(p.getDueDate());
-            cmd.append(" e/").append(p.getPriority());
-            cmd.append(" a/").append(p.getReminder());
+            cmd.append(" d/").append(p.getDueDate());
+            cmd.append(" dt/").append(p.getDueTime());
+            cmd.append(" p/").append(p.getPriority());
+            cmd.append(" r/").append(p.getReminder());
+            cmd.append(" rt/").append(p.getReminderTime());
 
             UniqueTagList tags = p.getTags();
             for(Tag t: tags){
@@ -503,8 +510,10 @@ public class LogicManagerTest {
             return new Task(
                     new TaskName(name),
                     new DueDate("1"),
+                    new DueTime("12:00"),
                     new Priority("1@email"),
                     new Reminder("House of 1"),
+                    new ReminderTime("12:00"),
                     new UniqueTagList(new Tag("tag"))
             );
         }

@@ -14,7 +14,7 @@ public class DateValidation {
 
     private static Pattern pattern;
     private static Matcher matcher;
-    public static final String DATE_VALIDATION_REGEX = "(0?[1-9]|[12][0-9]|3[01])-(0?[1-9]|1[012])-((19|20)\\d\\d) ([01]?[0-9]|2[0-3]):([0-5][0-9])";
+    public static final String DATE_VALIDATION_REGEX = "(0?[1-9]|[12][0-9]|3[01])-(0?[1-9]|1[012])-((19|20)\\d\\d)";
 
     public void DateValidator() {
 
@@ -40,11 +40,11 @@ public class DateValidation {
                 String day = matcher.group(1);
                 String month = matcher.group(2);
                 int year = Integer.parseInt(matcher.group(3));
-                int hour = Integer.parseInt(matcher.group(4));
+/*                int hour = Integer.parseInt(matcher.group(4));
                 int min = Integer.parseInt(matcher.group(5));
                 
                 if((hour<24) && (min<60)){
-
+*/
                 if (day.equals("31") && ((month.equals("4") || month.equals("6") || month.equals("9")
                         || month.equals("11") || month.equals("04") || month.equals("06") || month.equals("09")))) {
                     return false; // 4,6,9,11th month only have 30 days
@@ -71,8 +71,7 @@ public class DateValidation {
             }
         } else {
             return false;
-        }}
-        return false;
+        }
     }
 
     // Return today's date

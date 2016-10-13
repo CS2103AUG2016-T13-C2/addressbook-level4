@@ -29,15 +29,19 @@ public class Parser {
     private static final Pattern TASK_DATA_ARGS_FORMAT = // '/' forward slashes are reserved for delimiter prefixes
             Pattern.compile("(?<task>[^/]+)"
                     + "(?<isDuedatePrivate>p?)(?<duedate>(?: d/[^/]+)?)"
+                    + "(?<isDuetimePrivate>p?)(?<duetime>(?: dt/[^/]+)?)"
                     + "(?<isPriorityPrivate>p?)(?<priority>(?: p/[^/]+)?)"
                     + "(?<isReminderPrivate>p?)(?<reminder>(?: r/[^/]+)?)"
+                    + "(?<isReminderTimePrivate>p?)(?<remindertime>(?: rt/[^/]+)?)"
                     + "(?<tagArguments>(?: t/[^/]+)*)"); // variable number of tags
     
     private static final Pattern PERSON_EDIT_ARGS_FORMAT = // '/' forward slashes are reserved for delimiter prefixes
             Pattern.compile("(?<targetIndex>[0-9]+)" + "(?<task>(?: n/[^/]+)?)"
                     + "(?<isDuedatePrivate>p?)(?<duedate>(?: d/[^/]+)?)"
+                    + "(?<isDuetimePrivate>p?)(?<duetime>(?: dt/[^/]+)?)"
                     + "(?<isPriorityPrivate>p?)(?<priority>(?: p/[^/]+)?)"
                     + "(?<isReminderPrivate>p?)(?<reminder>(?: r/[^/]+)?)"
+                    + "(?<isReminderTimePrivate>p?)(?<remindertime>(?: rt/[^/]+)?)"
                     + "(?<tagArguments>(?: t/[^/]+)*)"); // variable number of tags
 
     public Parser() {}
@@ -109,8 +113,10 @@ public class Parser {
             return new AddCommand(
                     matcher.group("task"),
                     getElement(matcher.group("duedate")," d/"),
+                    getElement(matcher.group("duetime")," dt/"),
                     getElement(matcher.group("priority")," p/"),
                     getElement(matcher.group("reminder")," r/"),
+                    getElement(matcher.group("remindertime")," rt/"),
                     getTagsFromArgs(matcher.group("tagArguments"))
             );
         } catch (IllegalValueException ive) {
@@ -188,8 +194,10 @@ public class Parser {
             return new EditCommand(index.get(), 
                     getElement(matcher.group("task"), " n/"),
                     getElement(matcher.group("duedate")," d/"),
+                    getElement(matcher.group("duetime")," dt/"),
                     getElement(matcher.group("priority")," p/"),
                     getElement(matcher.group("reminder")," r/"),
+                    getElement(matcher.group("remindertime")," rt/"),
                     getTagsFromArgs(matcher.group("tagArguments"))
             );
         } catch (IllegalValueException ive) {

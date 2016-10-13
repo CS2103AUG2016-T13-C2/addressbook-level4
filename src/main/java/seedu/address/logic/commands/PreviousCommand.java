@@ -3,9 +3,11 @@ package seedu.address.logic.commands;
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.tag.UniqueTagList;
 import seedu.address.model.task.DueDate;
+import seedu.address.model.task.DueTime;
 import seedu.address.model.task.Priority;
 import seedu.address.model.task.ReadOnlyTask;
 import seedu.address.model.task.Reminder;
+import seedu.address.model.task.ReminderTime;
 import seedu.address.model.task.Task;
 import seedu.address.model.task.TaskName;
 /** 
@@ -32,8 +34,10 @@ public class PreviousCommand {
 		updatedTask = new Task(
                 new TaskName(task.getName().toString()),
                 new DueDate(task.getDueDate().toString()),
+                new DueTime(task.getDueTime().toString()),
                 new Priority(task.getPriority().toString()),
                 new Reminder(task.getReminder().toString()),
+                new ReminderTime(task.getReminderTime().toString()),
                 new UniqueTagList(task.getTags())
         );
 		} catch (IllegalValueException ive) {
@@ -49,8 +53,10 @@ public class PreviousCommand {
             oldTask = new Task(
                 new TaskName(originalTask.getName().toString()),
                 new DueDate(originalTask.getDueDate().toString()),
+                new DueTime(originalTask.getDueTime().toString()),
                 new Priority(originalTask.getPriority().toString()),
                 new Reminder(originalTask.getReminder().toString()),
+                new ReminderTime(originalTask.getReminderTime().toString()),
                 new UniqueTagList(originalTask.getTags())
         );
         } catch (IllegalValueException ive) {

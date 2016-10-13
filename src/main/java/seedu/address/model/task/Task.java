@@ -15,18 +15,22 @@ public class Task implements ReadOnlyTask {
     private DueDate duedate;
     private Priority priority;
     private Reminder reminder;
+    private DueTime duetime;
+    private ReminderTime remindertime;
 
     private UniqueTagList tags;
 
     /**
      * Every field must be present and not null.
      */
-    public Task(TaskName name, DueDate dueDate, Priority priority, Reminder reminder, UniqueTagList tags) {
+    public Task(TaskName name, DueDate dueDate, DueTime duetime, Priority priority, Reminder reminder, ReminderTime remindertime, UniqueTagList tags) {
         assert !CollectionUtil.isAnyNull(name, dueDate, priority, reminder, tags);
         this.name = name;
         this.duedate = dueDate;
+        this.duetime = duetime;
         this.priority = priority;
         this.reminder = reminder;
+        this.remindertime = remindertime;
         this.tags = new UniqueTagList(tags); // protect internal tags from changes in the arg list
     }
 
@@ -34,7 +38,7 @@ public class Task implements ReadOnlyTask {
      * Copy constructor.
      */
     public Task(ReadOnlyTask source) {
-        this(source.getName(), source.getDueDate(), source.getPriority(), source.getReminder(), source.getTags());
+        this(source.getName(), source.getDueDate(), source.getDueTime(), source.getPriority(), source.getReminder(), source.getReminderTime(), source.getTags());
     }
 
     @Override
@@ -85,6 +89,16 @@ public class Task implements ReadOnlyTask {
     @Override
     public String toString() {
         return getAsText();
+    }
+
+    @Override
+    public DueTime getDueTime() {
+        return duetime;
+    }
+
+    @Override
+    public ReminderTime getReminderTime() {
+        return remindertime;
     }
 
 }

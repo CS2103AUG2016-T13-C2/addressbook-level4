@@ -32,16 +32,9 @@ public class Reminder {
         if(date!=""){
         try {
             if (date.contains("today")) {
-                parts = date.split(" ");
-                time = parts[1];
                 date = DateValidation.TodayDate();
-                date = date + " " + time;
             } // allow user to key in today instead of today's date
             else if (date.contains("tomorrow")) {
-                parts = date.split(" ");
-                time = parts[1];
-                date = DateValidation.TodayDate();
-                date = date + " " + time;
                 date = DateValidation.TomorrowDate();
             } // allow user to key in "tomorrow" instead of tomorrow's date
             if (!isValidReminder(date)) {

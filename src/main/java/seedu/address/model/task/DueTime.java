@@ -5,12 +5,7 @@ import java.text.ParseException;
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.commons.util.DateValidation;
 
-/**
- * Represents a Task's DueDate in the Lifekeeper. Guarantees: immutable; is
- * valid as declared in {@link #isValidDueDate(String)}
- */
-public class DueDate {
-
+public class DueTime {
     public static final String MESSAGE_DUEDATE_CONSTRAINTS = "Task's DueDate should only contain valid date";
     public static final String MESSAGE_DUEDATE_INVALID = "reminder time has passed";
     public final String value;
@@ -21,25 +16,11 @@ public class DueDate {
      * @throws IllegalValueException
      *             if given due date string is invalid.
      */
-    public DueDate(String date) throws IllegalValueException {
+    public DueTime(String date) throws IllegalValueException {
         assert date != null;
-        if(date!=""){
-        try {
-            if (date.contains("today")) {
-                date = DateValidation.TodayDate();
-            } // allow user to key in today instead of today's date
-            else if (date.contains("tomorrow")) {
-                date = DateValidation.TomorrowDate();
-            } // allow user to key in "tomorrow" instead of tomorrow's date
-            if (!isValidDueDate(date)) {
-                throw new IllegalValueException(MESSAGE_DUEDATE_CONSTRAINTS);
-            }
-            if (!DateValidation.aftertoday(date)) // check if the time is future
-                                                  // time
-                throw new IllegalValueException(MESSAGE_DUEDATE_INVALID);
-        } catch (ParseException pe) {
-            throw new IllegalValueException(MESSAGE_DUEDATE_INVALID);
-        }}
+        String time;
+        String[] parts;
+             
 
         this.value = date;
     }
@@ -48,7 +29,7 @@ public class DueDate {
      * Returns true if a given string is a valid task reminder.
      */
     public static boolean isValidDueDate(String test) {
-        if ((DateValidation.validate(test))|| (test ==""))
+        if ((DateValidation.validate(test)))
             return true;
         else
             return false;

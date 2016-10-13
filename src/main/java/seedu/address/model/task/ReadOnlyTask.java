@@ -12,6 +12,8 @@ public interface ReadOnlyTask {
     DueDate getDueDate();
     Priority getPriority();
     Reminder getReminder();
+    DueTime getDueTime();
+    ReminderTime getReminderTime();
 
     /**
      * The returned TagList is a deep copy of the internal TagList,
@@ -27,8 +29,10 @@ public interface ReadOnlyTask {
                 || (other != null // this is first to avoid NPE below
                 && other.getName().equals(this.getName()) // state checks here onwards
                 && other.getDueDate().equals(this.getDueDate())
+                && other.getDueTime().equals(this.getDueTime())
                 && other.getPriority().equals(this.getPriority())
-                && other.getReminder().equals(this.getReminder()));
+                && other.getReminder().equals(this.getReminder())
+                && other.getReminderTime().equals(this.getReminderTime()));
     }
 
     /**

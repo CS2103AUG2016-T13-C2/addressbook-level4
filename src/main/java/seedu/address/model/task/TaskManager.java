@@ -17,8 +17,10 @@ public class TaskManager {
             newTask = new Task(
                     updateTaskName(oldTask, newParams, type),
                     updateDueDate(oldTask, newParams, type),
+                    updateDueTime(oldTask, newParams, type),
                     updatePriority(oldTask, newParams, type),
                     updateReminder(oldTask, newParams, type),
+                    updateReminderTime(oldTask, newParams, type),
                     updateTags(oldTask, newParams)
                     );
         } catch (IllegalValueException ive) {
@@ -51,6 +53,18 @@ public class TaskManager {
 
         return newDueDate;
     }
+    
+    private static DueTime updateDueTime(ReadOnlyTask oldTask, Task newParams, String type) throws IllegalValueException {
+        DueTime newDueTime;
+
+        if (newParams.getDueTime().toString().equals(NULL_ENTRY)&& type == "edit") {
+            newDueTime = new DueTime(oldTask.getDueTime().toString());
+        } else {
+            newDueTime = new DueTime(newParams.getDueTime().toString());
+        }
+
+        return newDueTime;
+    }
 
     private static Priority updatePriority(ReadOnlyTask oldTask, Task newParams, String type) throws IllegalValueException {
         Priority newPriority;
@@ -74,6 +88,18 @@ public class TaskManager {
         }
 
         return newReminder;
+    }
+    
+    private static ReminderTime updateReminderTime(ReadOnlyTask oldTask, Task newParams, String type) throws IllegalValueException {
+        ReminderTime newReminderTime;
+
+        if (newParams.getReminderTime().toString().equals(NULL_ENTRY)&& type == "edit") {
+            newReminderTime = new ReminderTime(oldTask.getReminderTime().toString());
+        } else {
+            newReminderTime = new ReminderTime(newParams.getReminderTime().toString());
+        }
+
+        return newReminderTime;
     }
 
     private static UniqueTagList updateTags(ReadOnlyTask oldTask, Task newParams) {

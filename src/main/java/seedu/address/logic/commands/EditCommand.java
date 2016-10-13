@@ -9,9 +9,11 @@ import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.tag.Tag;
 import seedu.address.model.tag.UniqueTagList;
 import seedu.address.model.task.DueDate;
+import seedu.address.model.task.DueTime;
 import seedu.address.model.task.Priority;
 import seedu.address.model.task.ReadOnlyTask;
 import seedu.address.model.task.Reminder;
+import seedu.address.model.task.ReminderTime;
 import seedu.address.model.task.Task;
 import seedu.address.model.task.TaskName;
 import seedu.address.model.task.UniqueTaskList.DuplicateTaskException;
@@ -39,7 +41,7 @@ public class EditCommand extends Command {
      *
      * @throws IllegalValueException if any of the raw values are invalid
      */
-    public EditCommand(int targetIndex, String name, String duedate, String priority, String reminder, Set<String> tags)
+    public EditCommand(int targetIndex, String name, String duedate, String duetime, String priority, String reminder, String remindertime, Set<String> tags)
             throws IllegalValueException {
         this.targetIndex = targetIndex;
         
@@ -50,8 +52,10 @@ public class EditCommand extends Command {
         this.newParams = new Task(
                 new TaskName(name),
                 new DueDate(duedate),
+                new DueTime(duetime),
                 new Priority(priority),
                 new Reminder(reminder),
+                new ReminderTime(remindertime),
                 new UniqueTagList(tagSet)
         );
     }
