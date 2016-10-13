@@ -21,12 +21,12 @@ public class EditCommand extends Command {
     
     public static final String COMMAND_WORD = "edit";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Edits the selected task from Lifekeeper. Irreversible. "
-            + "Parameters: INDEX (must be a positive integer) [TASK_NAME] [c/CATEGORY] [d/DEADLINE] p/PRIORITY_LEVEL r/REMINDER [t/TAG]...\n";
-            /*+ "Example: " + COMMAND_WORD
-            + " CS2103 T7A1 d/06-10-2016 p/1 r/05-01-2016 t/CS t/groupwork";*/
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Edits the indexed task from Lifekeeper. \n"
+            + "Parameters: INDEX (must be a positive integer) [n/TASK_NAME] [c/CATEGORY] [d/DEADLINE] p/PRIORITY_LEVEL r/REMINDER [t/TAG]...\n"
+            + "Example: " + COMMAND_WORD
+            + " 1 n/CS2103 T8A2 d/15-10-2016 p/3 r/12-01-2016 t/CS t/project";
     
-    public static final String MESSAGE_EDIT_TASK_SUCCESS = "Edited Task: %1$s";
+    public static final String MESSAGE_EDIT_TASK_SUCCESS = "Edited Task from: %1$s\nto: %2$s";
     
     public static final String MESSAGE_TASK_EXISTS = "An existing task already contains the specified parameters.";
     
@@ -66,20 +66,22 @@ public class EditCommand extends Command {
         }
 
         ReadOnlyTask taskToEdit = lastShownList.get(targetIndex - 1);
-
+        
         try {
-            model.editTask(taskToEdit, newParams);
+            ReadOnlyTask oldTask = new Task(taskToEdit);
+            
+            Task editedTask = new Task(model.editTask(taskToEdit, newParams));
+            
+            PreviousCommand editCommand = new PreviousCommand(COMMAND_WORD,oldTask,editedTask);
+            PreviousCommandsStack.push(editCommand);
+            
+            return new CommandResult(String.format(MESSAGE_EDIT_TASK_SUCCESS, taskToEdit, editedTask));
         } catch (TaskNotFoundException tnfe) {
             assert false : "The target task to be edited cannot be missing";
+            return new CommandResult("");
         } catch (DuplicateTaskException dte) {
             return new CommandResult(MESSAGE_TASK_EXISTS);
-        } catch (IllegalValueException ive) {
-            return new CommandResult(ive.getMessage());
-        } catch (Exception e) {
-            //I'm pretty sure the code will not reach here.
         }
-
-        return new CommandResult(String.format(MESSAGE_EDIT_TASK_SUCCESS, taskToEdit));
     }
 
 }

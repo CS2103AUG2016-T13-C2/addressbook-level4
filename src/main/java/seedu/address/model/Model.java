@@ -4,6 +4,8 @@ import seedu.address.commons.core.UnmodifiableObservableList;
 import seedu.address.model.task.ReadOnlyTask;
 import seedu.address.model.task.Task;
 import seedu.address.model.task.UniqueTaskList;
+import seedu.address.model.task.UniqueTaskList.DuplicateTaskException;
+import seedu.address.model.task.UniqueTaskList.TaskNotFoundException;
 
 import java.util.Set;
 
@@ -23,8 +25,10 @@ public interface Model {
     /** Adds the given task */
     void addTask(Task person) throws UniqueTaskList.DuplicateTaskException;
     
-    /** Edits the given task */
-    void editTask(ReadOnlyTask oldTask, Task newParams) throws Exception;
+    /** Edits the given task
+     * @return The edited task
+     */
+    Task editTask(ReadOnlyTask oldTask, Task newParams) throws TaskNotFoundException, DuplicateTaskException;
 
     /** Returns the filtered task list as an {@code UnmodifiableObservableList<ReadOnlyTask>} */
     UnmodifiableObservableList<ReadOnlyTask> getFilteredTaskList();

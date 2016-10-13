@@ -7,6 +7,8 @@ import seedu.address.model.task.ReadOnlyTask;
 import seedu.address.model.task.Task;
 import seedu.address.model.task.TaskManager;
 import seedu.address.model.task.UniqueTaskList;
+import seedu.address.model.task.UniqueTaskList.DuplicateTaskException;
+import seedu.address.model.task.UniqueTaskList.TaskNotFoundException;
 
 import java.util.*;
 import java.util.stream.Collectors;
@@ -113,12 +115,12 @@ public class AddressBook implements ReadOnlyLifeKeeper {
         }
     }
     
-    public boolean editTask(ReadOnlyTask task, Task newParams) throws Exception {
+    public Task editTask(ReadOnlyTask task, Task newParams) throws TaskNotFoundException, DuplicateTaskException {
         if (tasks.contains(task)) {
-            Task newTask = TaskManager.changeParams(task, newParams);
+            Task newTask = TaskManager.mapUnaffectedParams(task, newParams);
             tasks.remove(task);
             tasks.add(newTask);
-            return true;
+            return newTask;
         } else {
             throw new UniqueTaskList.TaskNotFoundException();
         }
