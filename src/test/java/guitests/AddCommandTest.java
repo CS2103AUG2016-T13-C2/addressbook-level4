@@ -36,6 +36,10 @@ public class AddCommandTest extends AddressBookGuiTest {
         //invalid command
         commandBox.runCommand("adds Johnny");
         assertResultMessage(Messages.MESSAGE_UNKNOWN_COMMAND);
+        
+        //add a floating task
+        commandBox.runCommand("add wrongDueDateTestCase p/1");
+        assertAddSuccess(td.floatingTaskTestCase);
     }
 
     private void assertAddSuccess(TestTask taskToAdd, TestTask... currentList) {
