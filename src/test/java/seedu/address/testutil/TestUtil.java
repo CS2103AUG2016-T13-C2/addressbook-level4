@@ -325,7 +325,7 @@ public class TestUtil {
      * @return TestPerson with modified details.
      */
     
-    public static TestPerson editPersonAttributes(final TestPerson person, TaskName name, Reminder address, Priority email, DueDate phone) {
+    public static TestTask editTaskAttributes(final TestTask person, TaskName name, Reminder address, Priority email, DueDate phone) {
     	// I am still unsure how to incorporate tag list into testing.
     	person.setName(name);
     	person.setAddress(address);

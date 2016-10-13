@@ -14,7 +14,7 @@ import seedu.address.model.task.DueDate;
 import seedu.address.model.task.Priority;
 import seedu.address.model.task.Reminder;
 import seedu.address.model.task.TaskName;
-import seedu.address.testutil.TestPerson;
+import seedu.address.testutil.TestTask;
 import seedu.address.testutil.TestUtil;
 
 
@@ -25,7 +25,7 @@ public class EditCommandTest extends AddressBookGuiTest {
      * Assumptions: there is at least one task already in TypicalTestPersons.
      */
     public void edit() {
-        TestPerson[] currentList = td.getTypicalPersons();
+        TestTask[] currentList = td.getTypicalTasks();
         
     	//edit one person selected
         int targetIndex = 1;
@@ -48,13 +48,13 @@ public class EditCommandTest extends AddressBookGuiTest {
      * @param currentList A copy of the current list of task (before edits).
      */
 	
-	private void assertEditSuccess(int targetIndexOneIndexed, final TestPerson[] currentList) {
-        TestPerson taskToEdit = currentList[targetIndexOneIndexed-1]; //-1 because array uses zero indexing
+	private void assertEditSuccess(int targetIndexOneIndexed, final TestTask[] currentList) {
+        TestTask taskToEdit = currentList[targetIndexOneIndexed-1]; //-1 because array uses zero indexing
         
 
         try {
             //i am still unsure how to initialise the tags.
-            TestPerson expectedResult = TestUtil.editPersonAttributes(taskToEdit, 
+            TestTask expectedResult = TestUtil.editTaskAttributes(taskToEdit, 
         	    	new TaskName("CS2103 T7A1 "), 
         	    	new Reminder("05-01-2016"), 
         	    	new Priority("1"), 
