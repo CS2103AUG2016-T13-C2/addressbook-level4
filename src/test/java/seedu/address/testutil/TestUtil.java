@@ -327,10 +327,10 @@ public class TestUtil {
     
     public static TestTask editTaskAttributes(final TestTask person, TaskName name, Reminder address, Priority email, DueDate phone) {
     	// I am still unsure how to incorporate tag list into testing.
-    	person.setName(name);
-    	person.setAddress(address);
-    	person.setEmail(email);
-    	person.setPhone(phone);
+    	person.setTaskName(name);
+    	person.setReminder(address);
+    	person.setPriority(email);
+    	person.setDueDate(phone);
     	
     	return person;
     }
