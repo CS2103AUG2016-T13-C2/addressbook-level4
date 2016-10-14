@@ -13,23 +13,19 @@ public class TypicalTestTasks {
 
     public TypicalTestTasks() {
         try {
-            finishIE3101Revision =  new TaskBuilder().withTaskName("Complete IE3101 Revision").withReminder("20-11-2016 14:00")
-                    .withPriority("1").withDueDate("20-12-2016 14:00")
-                    .withTags("tedious").build();
-            finishCS2103Project = new TaskBuilder().withTaskName("Finish CS2103 Project").withReminder("31-11-2016 14:00")
-                    .withPriority("3").withDueDate("31-12-2016 14:00")
-                    .withTags("difficult", "urgent").build();
+            finishIE3101Revision =  new TaskBuilder().withTaskName("Complete IE3101 Revision").withReminder("20-11-2016 14:00").withPriority("1").withDueDate("20-12-2016 14:00").build();
+            finishCS2103Project = new TaskBuilder().withTaskName("Finish CS2103 Project").withReminder("31-12-2016 14:00").withPriority("3").withDueDate("31-12-2016 14:00").build();
             planTaiwanTrip = new TaskBuilder().withTaskName("Plan Taiwan Trip").withDueDate("31-12-2016 14:00").withPriority("0").withReminder("20-11-2016 14:00").withTags("tedious").build();
             findDaniel = new TaskBuilder().withTaskName("Find Daniel").withDueDate("31-12-2016 19:00").withPriority("1").withReminder("31-12-2016 18:00").withTags("tedious").build();
-            findElle = new TaskBuilder().withTaskName("Find Elle").withDueDate("31-11-2016 14:00").withPriority("2").withReminder("20-12-2016 14:00").withTags("tedious").build();
-            findFiona = new TaskBuilder().withTaskName("Find Fiona").withDueDate("31-11-2016 14:00").withPriority("3").withReminder("28-11-2016 14:00").withTags("tedious").build();
-            findGeorge = new TaskBuilder().withTaskName("Find George").withDueDate("31-11-2016 14:00").withPriority("0").withReminder("20-11-2016 14:00").withTags("tedious").build();
+            findElle = new TaskBuilder().withTaskName("Find Elle").withDueDate("31-12-2016 14:00").withPriority("2").withReminder("20-12-2016 14:00").withTags("tedious").build();
+            findFiona = new TaskBuilder().withTaskName("Find Fiona").withDueDate("31-12-2016 14:00").withPriority("3").withReminder("28-11-2016 14:00").withTags("tedious").build();
+            findGeorge = new TaskBuilder().withTaskName("Find George").withDueDate("31-12-2016 14:00").withPriority("0").withReminder("20-11-2016 14:00").withTags("tedious").build();
 
             //Input Test Cases
-            findHoon = new TaskBuilder().withTaskName("Find Hoon").withDueDate("31-11-2018 14:00").withPriority("2").withReminder("20-11-2017 14:00").build();
-            findIda = new TaskBuilder().withTaskName("Find Ida").withDueDate("31-11-2019 14:00").withPriority("1").withReminder("20-11-2018 14:00").build();
+            findHoon = new TaskBuilder().withTaskName("Find Hoon").withDueDate("31-12-2018 14:00").withPriority("2").withReminder("20-11-2017 14:00").build();
+            findIda = new TaskBuilder().withTaskName("Find Ida").withDueDate("31-12-2019 14:00").withPriority("1").withReminder("20-11-2018 14:00").build();
             floatingTaskTestCase = new TaskBuilder().withTaskName("floatingTaskTestCase").withPriority("1").build();
-            tomorrowTaskTestCase = new TaskBuilder(). withTaskName("TomorrowTaskTestCase").withDueDate("Tomorrow 14:00").withPriority("1").withReminder("Tomorrow 13:00").build();
+         //   tomorrowTaskTestCase = new TaskBuilder(). withTaskName("tomorrowTaskTestCase").withDueDate("tomorrow 14:00").withPriority("1").withReminder("Tomorrow 13:00").build();
             
             //invalid test cases
             //invalidDueDateTestCase = new TaskBuilder().withTaskName("invalidDueDateTestCase").withReminder("20-11-2016").withPriority("1").withDueDate("20-40-2016").build();
