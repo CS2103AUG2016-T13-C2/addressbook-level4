@@ -1,5 +1,8 @@
 package seedu.address.commons.util;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.concurrent.TimeUnit;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -38,5 +41,13 @@ public class TimeValidation {
             }
         }
         return false;
+    }
+    
+    //format today's date into date format dd-MM-yyyy
+    public static String TimeFormatToday() {
+        Date today = new Date();
+        Date dayafter = new Date(today.getTime() + TimeUnit.HOURS.toMillis( 4 ));
+        String strTime = new SimpleDateFormat("HH:mm").format(dayafter);       
+        return strTime;
     }
 }

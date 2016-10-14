@@ -12,7 +12,7 @@ import seedu.address.commons.util.DateValidation;
 public class DueDate {
 
     public static final String MESSAGE_DUEDATE_CONSTRAINTS = "Task's DueDate should only contain valid date";
-    public static final String MESSAGE_DUEDATE_INVALID = "reminder time has passed";
+    public static final String MESSAGE_DUEDATE_INVALID = "due date has passed";
     public final String value;
 
     /**
@@ -40,6 +40,11 @@ public class DueDate {
                 throw new IllegalValueException(MESSAGE_DUEDATE_INVALID);
             }
         }
+        
+        if(date==""){
+            date = DateValidation.TodayDate();
+        }
+
         this.value = date;
     }
 

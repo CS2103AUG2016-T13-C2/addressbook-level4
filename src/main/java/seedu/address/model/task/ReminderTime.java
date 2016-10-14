@@ -1,13 +1,12 @@
 package seedu.address.model.task;
 
 import seedu.address.commons.exceptions.IllegalValueException;
-import seedu.address.commons.util.DateValidation;
 import seedu.address.commons.util.TimeValidation;
 
 public class ReminderTime {
 
-        public static final String MESSAGE_REMINDER_CONSTRAINTS = "Task reminder can only be in date format";
-        public static final String MESSAGE_REMINDER_INVALID = "reminder time has passed";
+        public static final String MESSAGE_REMINDERTIME_CONSTRAINTS = "Task reminder can only be in date format";
+        public static final String MESSAGE_REMINDERTIME_INVALID = "reminder time has passed";
         public final String value;
 
         /**
@@ -16,15 +15,20 @@ public class ReminderTime {
          * @throws IllegalValueException
          *             if given reminder string is invalid.
          */
-        public ReminderTime(String date) throws IllegalValueException {
-            assert date != null;
-            this.value = date;
+        public ReminderTime(String time) throws IllegalValueException {
+            assert time != null;
+            if (!isValidReminderTime(time)) {
+                throw new IllegalValueException(MESSAGE_REMINDERTIME_CONSTRAINTS);
+            }
+            if (time =="")
+                time = TimeValidation.TimeFormatToday();
+            this.value = time;
         }
 
         /**
          * Returns true if a given string is a valid task reminder.
          */
-        public static boolean isValidReminder(String test) {
+        public static boolean isValidReminderTime(String test) {
             if ((TimeValidation.validate(test))|| (test ==""))
                 return true;
             else

@@ -2,12 +2,11 @@ package seedu.address.model.task;
 
 
 import seedu.address.commons.exceptions.IllegalValueException;
-import seedu.address.commons.util.DateValidation;
 import seedu.address.commons.util.TimeValidation;
 
 public class DueTime {
     public static final String MESSAGE_DUEDATE_CONSTRAINTS = "Task's DueDate should only contain valid date";
-    public static final String MESSAGE_DUEDATE_INVALID = "reminder time has passed";
+    public static final String MESSAGE_DUEDATE_INVALID = "due time has passed";
     public final String value;
 
     /**
@@ -21,6 +20,8 @@ public class DueTime {
         if (!isValidDueDate(time)) {
             throw new IllegalValueException(MESSAGE_DUEDATE_CONSTRAINTS);
         }
+        if (time =="")
+            time = TimeValidation.TimeFormatToday();
         this.value = time;
     }
 

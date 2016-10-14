@@ -11,7 +11,7 @@ import seedu.address.commons.util.DateValidation;
 public class Reminder {
 
     public static final String MESSAGE_REMINDER_CONSTRAINTS = "Task reminder can only be in date format";
-    public static final String MESSAGE_REMINDER_INVALID = "reminder time has passed";
+    public static final String MESSAGE_REMINDER_INVALID = "reminder date has passed";
     public final String value;
 
     /**
@@ -39,6 +39,9 @@ public class Reminder {
         } catch (ParseException pe) {
             throw new IllegalValueException(MESSAGE_REMINDER_INVALID);
         }}
+        if(date==""){
+            date = DateValidation.TodayDate();
+        }
 
         this.value = date;
     }
