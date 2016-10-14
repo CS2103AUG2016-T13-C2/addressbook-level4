@@ -8,8 +8,6 @@ import java.util.concurrent.TimeUnit;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import seedu.address.commons.exceptions.IllegalValueException;
-
 public class DateValidation {
 
     private static Pattern pattern;
@@ -105,7 +103,7 @@ public class DateValidation {
     }
     //check if the time entered is not in the past
     public static boolean aftertoday (String reminderdate) throws ParseException{
-        DateFormat format = new SimpleDateFormat("dd-MM-yyyy hh:mm");
+        DateFormat format = new SimpleDateFormat("dd-MM-yyyy");
         Date date = format.parse(reminderdate);
         Date today = new Date();
         if(date.before(today))

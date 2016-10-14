@@ -13,6 +13,8 @@ public class PersonCardHandle extends GuiHandle {
     private static final String ADDRESS_FIELD_ID = "#address";
     private static final String PHONE_FIELD_ID = "#phone";
     private static final String EMAIL_FIELD_ID = "#email";
+    private static final String DUETIME_FIELD_ID = "#duetime";
+    private static final String REMINDERTIME_FIELD_ID = "#remindertime";
 
     private Node node;
 
@@ -40,10 +42,18 @@ public class PersonCardHandle extends GuiHandle {
     public String getEmail() {
         return getTextFromLabel(EMAIL_FIELD_ID);
     }
+    
+    public String getDueTime() {
+        return getTextFromLabel(DUETIME_FIELD_ID);
+    }
+    
+    public String getReminderTime() {
+        return getTextFromLabel(REMINDERTIME_FIELD_ID);
+    }
 
     public boolean isSamePerson(ReadOnlyTask person){
-        return getFullName().equals(person.getName().fullName) && getPhone().equals(person.getDueDate().value)
-                && getEmail().equals(person.getPriority().value) && getAddress().equals(person.getReminder().value);
+        return getFullName().equals(person.getName().fullName) && getPhone().equals(person.getDueDate().value)&& getDueTime().equals(person.getDueTime().value)
+                && getEmail().equals(person.getPriority().value) && getAddress().equals(person.getReminder().value) && getReminderTime().equals(person.getReminderTime().value);
     }
 
     @Override

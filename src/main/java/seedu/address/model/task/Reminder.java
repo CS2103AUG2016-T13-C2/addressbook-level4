@@ -1,10 +1,6 @@
 package seedu.address.model.task;
 
-import java.text.DateFormat;
 import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.Date;
-
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.commons.util.DateValidation;
 
@@ -26,8 +22,6 @@ public class Reminder {
      */
     public Reminder(String date) throws IllegalValueException {
         assert date != null;
-        String time;
-        String[] parts;
         
         if(date!=""){
         try {

@@ -28,12 +28,20 @@ public class TestPerson implements ReadOnlyTask {
         this.address = address;
     }
 
+    public void setReminderTime(ReminderTime remindertime) {
+        this.remindertime = remindertime;
+    }
+    
     public void setEmail(Priority email) {
         this.email = email;
     }
 
     public void setPhone(DueDate phone) {
         this.phone = phone;
+    }
+    
+    public void setDueTime(DueTime duetime) {
+        this.duetime = duetime;
     }
 
     @Override

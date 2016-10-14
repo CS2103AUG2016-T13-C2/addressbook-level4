@@ -43,10 +43,14 @@ public interface ReadOnlyTask {
         builder.append(getName())
                 .append(" Duedate: ")
                 .append(getDueDate())
+                .append(" Duetime: ")
+                .append(getDueTime())
                 .append(" Priority: ")
                 .append(getPriority())
                 .append(" Reminder: ")
                 .append(getReminder())
+                .append(" ReminderTime: ")
+                .append(getReminderTime())
                 .append(" Tags: ");
         getTags().forEach(builder::append);
         return builder.toString();

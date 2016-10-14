@@ -1,9 +1,9 @@
 package seedu.address.model.task;
 
-import java.text.ParseException;
 
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.commons.util.DateValidation;
+import seedu.address.commons.util.TimeValidation;
 
 public class DueTime {
     public static final String MESSAGE_DUEDATE_CONSTRAINTS = "Task's DueDate should only contain valid date";
@@ -16,20 +16,19 @@ public class DueTime {
      * @throws IllegalValueException
      *             if given due date string is invalid.
      */
-    public DueTime(String date) throws IllegalValueException {
-        assert date != null;
-        String time;
-        String[] parts;
-             
-
-        this.value = date;
+    public DueTime(String time) throws IllegalValueException {
+        assert time != null;
+        if (!isValidDueDate(time)) {
+            throw new IllegalValueException(MESSAGE_DUEDATE_CONSTRAINTS);
+        }
+        this.value = time;
     }
 
     /**
      * Returns true if a given string is a valid task reminder.
      */
     public static boolean isValidDueDate(String test) {
-        if ((DateValidation.validate(test)))
+        if ((TimeValidation.validate(test)) || (test == ""))
             return true;
         else
             return false;

@@ -1,9 +1,8 @@
 package seedu.address.model.task;
 
-import java.text.ParseException;
-
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.commons.util.DateValidation;
+import seedu.address.commons.util.TimeValidation;
 
 public class ReminderTime {
 
@@ -19,10 +18,6 @@ public class ReminderTime {
          */
         public ReminderTime(String date) throws IllegalValueException {
             assert date != null;
-            String time;
-            String[] parts;
-            
-            
             this.value = date;
         }
 
@@ -30,7 +25,7 @@ public class ReminderTime {
          * Returns true if a given string is a valid task reminder.
          */
         public static boolean isValidReminder(String test) {
-            if ((DateValidation.validate(test))|| (test ==""))
+            if ((TimeValidation.validate(test))|| (test ==""))
                 return true;
             else
                 return false;

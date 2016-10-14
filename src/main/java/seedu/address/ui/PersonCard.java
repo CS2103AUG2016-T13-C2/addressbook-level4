@@ -23,6 +23,10 @@ public class PersonCard extends UiPart{
     @FXML
     private Label email;
     @FXML
+    private Label duetime;
+    @FXML
+    private Label remindertime;
+    @FXML
     private Label tags;
 
     private ReadOnlyTask person;
@@ -44,7 +48,9 @@ public class PersonCard extends UiPart{
         name.setText(person.getName().fullName);
         id.setText(displayedIndex + ". ");
         phone.setText(person.getDueDate().value);
+ //       duetime.setText(person.getDueTime().value);
         address.setText(person.getReminder().value);
+//       remindertime.setText(person.getReminderTime().value);
         email.setText(person.getPriority().value);
         tags.setText(person.tagsString());
     }

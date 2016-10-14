@@ -31,12 +31,23 @@ public class PersonBuilder {
         this.person.setAddress(new Reminder(address));
         return this;
     }
+    
+    public PersonBuilder withReminderTime(String remindertime) throws IllegalValueException {
+        this.person.setReminderTime(new ReminderTime(remindertime));
+        return this;
+    }
 
     public PersonBuilder withPhone(String phone) throws IllegalValueException {
         this.person.setPhone(new DueDate(phone));
         return this;
     }
 
+    public PersonBuilder withDueTime(String duetime) throws IllegalValueException {
+        this.person.setDueTime(new DueTime(duetime));
+        return this;
+    }
+
+    
     public PersonBuilder withEmail(String email) throws IllegalValueException {
         this.person.setEmail(new Priority(email));
         return this;

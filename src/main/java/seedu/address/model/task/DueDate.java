@@ -23,24 +23,23 @@ public class DueDate {
      */
     public DueDate(String date) throws IllegalValueException {
         assert date != null;
-        if(date!=""){
-        try {
-            if (date.contains("today")) {
-                date = DateValidation.TodayDate();
-            } // allow user to key in today instead of today's date
-            else if (date.contains("tomorrow")) {
-                date = DateValidation.TomorrowDate();
-            } // allow user to key in "tomorrow" instead of tomorrow's date
-            if (!isValidDueDate(date)) {
-                throw new IllegalValueException(MESSAGE_DUEDATE_CONSTRAINTS);
-            }
-            if (!DateValidation.aftertoday(date)) // check if the time is future
-                                                  // time
+        if (date != "") {
+            try {
+                if (date.contains("today")) {
+                    date = DateValidation.TodayDate();
+                } // allow user to key in today instead of today's date
+                else if (date.contains("tomorrow")) {
+                    date = DateValidation.TomorrowDate();
+                } // allow user to key in "tomorrow" instead of tomorrow's date
+                if (!isValidDueDate(date)) {
+                    throw new IllegalValueException(MESSAGE_DUEDATE_CONSTRAINTS);
+                }
+                if (!DateValidation.aftertoday(date)) // check if the date is future date
+                    throw new IllegalValueException(MESSAGE_DUEDATE_INVALID);
+            } catch (ParseException pe) {
                 throw new IllegalValueException(MESSAGE_DUEDATE_INVALID);
-        } catch (ParseException pe) {
-            throw new IllegalValueException(MESSAGE_DUEDATE_INVALID);
-        }}
-
+            }
+        }
         this.value = date;
     }
 
@@ -48,7 +47,7 @@ public class DueDate {
      * Returns true if a given string is a valid task reminder.
      */
     public static boolean isValidDueDate(String test) {
-        if ((DateValidation.validate(test))|| (test ==""))
+        if ((DateValidation.validate(test)) || (test == ""))
             return true;
         else
             return false;
