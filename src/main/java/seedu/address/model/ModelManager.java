@@ -4,6 +4,7 @@ import javafx.collections.transformation.FilteredList;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.commons.core.UnmodifiableObservableList;
 import seedu.address.commons.util.StringUtil;
+import seedu.address.model.tag.Tag;
 import seedu.address.model.task.ReadOnlyTask;
 import seedu.address.model.task.Task;
 import seedu.address.model.task.UniqueTaskList;
@@ -24,6 +25,7 @@ public class ModelManager extends ComponentManager implements Model {
 
     private final AddressBook addressBook;
     private final FilteredList<Task> filteredPersons;
+    private final FilteredList<Tag> filteredTags;
 
     /**
      * Initializes a ModelManager with the given AddressBook
@@ -38,6 +40,7 @@ public class ModelManager extends ComponentManager implements Model {
 
         addressBook = new AddressBook(src);
         filteredPersons = new FilteredList<>(addressBook.getPersons());
+        filteredTags = new FilteredList<>(addressBook.getTags());
     }
 
     public ModelManager() {
@@ -47,6 +50,7 @@ public class ModelManager extends ComponentManager implements Model {
     public ModelManager(ReadOnlyLifeKeeper initialData, UserPrefs userPrefs) {
         addressBook = new AddressBook(initialData);
         filteredPersons = new FilteredList<>(addressBook.getPersons());
+        filteredTags = new FilteredList<>(addressBook.getTags());
     }
 
     @Override
@@ -74,14 +78,14 @@ public class ModelManager extends ComponentManager implements Model {
     @Override
     public synchronized void addTask(Task person) throws UniqueTaskList.DuplicateTaskException {
         addressBook.addPerson(person);
-        updateFilteredListToShowAll();
+        updateFilteredListToShowAllTasks();
         indicateAddressBookChanged();
     }
     
     @Override
     public synchronized Task editTask(ReadOnlyTask oldTask, Task newParams) throws TaskNotFoundException, DuplicateTaskException {
         Task editedTask = addressBook.editTask(oldTask, newParams, "edit");
-        updateFilteredListToShowAll();
+        updateFilteredListToShowAllTasks();
         indicateAddressBookChanged();
         
         return editedTask;
@@ -90,7 +94,7 @@ public class ModelManager extends ComponentManager implements Model {
     @Override
     public synchronized Task undoEditTask(ReadOnlyTask oldTask, Task newParams) throws TaskNotFoundException, DuplicateTaskException {
         Task editedTask = addressBook.editTask(oldTask, newParams, "undo");
-        updateFilteredListToShowAll();
+        updateFilteredListToShowAllTasks();
         indicateAddressBookChanged();
         
         return editedTask;
@@ -104,13 +108,18 @@ public class ModelManager extends ComponentManager implements Model {
     }
 
     @Override
-    public void updateFilteredListToShowAll() {
+    public void updateFilteredListToShowAllTasks() {
         filteredPersons.setPredicate(null);
     }
 
     @Override
     public void updateFilteredTaskList(Set<String> keywords){
         updateFilteredPersonList(new PredicateExpression(new NameQualifier(keywords)));
+    }
+    
+    @Override
+    public void updateFilteredListToShowAllTags() {
+        filteredTags.setPredicate(null);
     }
 
     private void updateFilteredPersonList(Expression expression) {
@@ -166,6 +175,19 @@ public class ModelManager extends ComponentManager implements Model {
         @Override
         public String toString() {
             return "name=" + String.join(", ", nameKeyWords);
+        }
+    }
+    
+    private class TagQualifier implements Qualifier {
+        private Set<String> tagKeyWords;
+        
+        TagQualifier(Set<String> tagKeyWords) {
+            this.tagKeyWords = tagKeyWords;
+        }
+        
+        @Override
+        public String toString() {
+            return "tags=" + String.join(", ", tagKeyWords);
         }
     }
 

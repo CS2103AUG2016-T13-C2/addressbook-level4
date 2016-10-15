@@ -52,6 +52,10 @@ public class AddressBook implements ReadOnlyLifeKeeper {
     public ObservableList<Task> getPersons() {
         return tasks.getInternalList();
     }
+    
+    public ObservableList<Tag> getTags() {
+        return tags.getInternalList();
+    }
 
     public void setPersons(List<Task> persons) {
         this.tasks.getInternalList().setAll(persons);
