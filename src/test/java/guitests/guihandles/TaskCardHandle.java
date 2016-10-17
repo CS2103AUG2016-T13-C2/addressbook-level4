@@ -25,39 +25,49 @@ public class TaskCardHandle extends GuiHandle {
         return getTextFromLabel(fieldId, node);
     }
 
-    public String getFullName() {
+    public String getTaskName() {
         return getTextFromLabel(NAME_FIELD_ID);
     }
 
-    public String getAddress() {
+    /**
+     * 
+     * @return String that represents Reminder, formatted as Day, Month DD, YYYY hh:mm
+     */
+    public String getReminder() {
         return getTextFromLabel(ADDRESS_FIELD_ID);
     }
-
-    public String getPhone() {
+    /**
+     * 
+     * @return String that represents DueDate, formatted as Day, Month DD, YYYY hh:mm
+     */
+    public String getDueDate() {
         return getTextFromLabel(PHONE_FIELD_ID);
     }
-
-    public String getEmail() {
+    /**
+     * 
+     * @return Priority in String Format
+     */
+    public String getPriority() {
         return getTextFromLabel(EMAIL_FIELD_ID);
     }
 
-    public boolean isSamePerson(ReadOnlyTask person){
-        return getFullName().equals(person.getName().fullName) && getPhone().equals(person.getDueDate().value)
-                && getEmail().equals(person.getPriority().value) && getAddress().equals(person.getReminder().value);
+    public boolean isSamePerson(ReadOnlyTask task){
+        return getTaskName().equals(task.getName().fullName) && getDueDate().equals(task.getDueDate().outputDueDateAsString())
+                && getPriority().equals(task.getPriority().value) && getReminder().equals(task.getReminder().outputReminderDateAsString());
     }
 
     @Override
     public boolean equals(Object obj) {
         if(obj instanceof TaskCardHandle) {
             TaskCardHandle handle = (TaskCardHandle) obj;
-            return getFullName().equals(handle.getFullName())
-                    && getAddress().equals(handle.getAddress()); //TODO: compare the rest
+            return getTaskName().equals(handle.getTaskName())
+                    && getReminder().equals(handle.getReminder()); //TODO: compare the rest
         }
         return super.equals(obj);
     }
 
     @Override
     public String toString() {
-        return getFullName() + " " + getAddress();
+        return getTaskName() + " " + getReminder();
     }
 }

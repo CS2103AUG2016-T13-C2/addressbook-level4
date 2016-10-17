@@ -57,4 +57,20 @@ public class DueDate extends DateTime {
             this.value.setTime(taskDate);
         }
     }
+    
+    /**
+     * Outputs Due Date as a string, according to a specific format. Uses a default format Day, Month DD, YYYY hh:mm when format is not specified.
+     * 
+     * Prerequisite: Format is specified correctly. (Most likely will use a standard format for testing)
+     */
+    
+    public String outputDueDateAsString (String format) {
+    	SimpleDateFormat formatter = new SimpleDateFormat();
+    	return formatter.format(this.getCalendarValue().getTime());
+    }
+    
+    public String outputDueDateAsString () {
+    	SimpleDateFormat formatter = new SimpleDateFormat("EEE, MM d, yyyy HH:mm");
+    	return formatter.format(this.getCalendarValue().getTime());
+    }
 }

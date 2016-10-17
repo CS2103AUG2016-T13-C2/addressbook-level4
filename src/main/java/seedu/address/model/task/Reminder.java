@@ -58,4 +58,20 @@ public class Reminder extends DateTime {
             this.value.setTime(taskDate);
         }
     }
+    
+    /**
+     * Outputs Reminder Date as a string, according to a specific format. Uses a standard format when format is not specified.
+     * 
+     * Prerequisite: Format is specified correctly. (Most likely will use a standard format for testing)
+     */
+
+    public String outputReminderDateAsString (String format) {
+    	SimpleDateFormat formatter = new SimpleDateFormat();
+    	return formatter.format(this.getCalendarValue().getTime());
+    }
+    
+    public String outputReminderDateAsString () {
+    	SimpleDateFormat formatter = new SimpleDateFormat("EEE, MM d, yyyy HH:mm");
+    	return formatter.format(this.getCalendarValue().getTime());
+    }
 }

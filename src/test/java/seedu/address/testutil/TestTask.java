@@ -3,6 +3,9 @@ package seedu.address.testutil;
 import seedu.address.model.tag.UniqueTagList;
 import seedu.address.model.task.*;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 /**
  * A mutable person object. For testing only.
  */
@@ -63,14 +66,22 @@ public class TestTask implements ReadOnlyTask {
     public String toString() {
         return getAsText();
     }
-
+    
+    /**
+     * For the task, generates and then returns relevant CLI input, based on the attributes the task.
+     */
+    
     public String getAddCommand() {
+    	
         StringBuilder sb = new StringBuilder();
         sb.append("add " + this.getName().fullName + " ");
-        sb.append("d/" + this.getDueDate().value + " ");
+        sb.append("d/" + this.getDueDate().outputDueDateAsString("d-MM-yyyy HH:mm") + " ");
         sb.append("p/" + this.getPriority().value + " ");
-        sb.append("r/" + this.getReminder().value + " ");
+        sb.append("r/" + this.getReminder().outputReminderDateAsString("d-MM-yyyy HH:mm") + " ");
         this.getTags().getInternalList().stream().forEach(s -> sb.append("t/" + s.tagName + " "));
+        
+        System.out.println(sb);
+        
         return sb.toString();
     }
 }

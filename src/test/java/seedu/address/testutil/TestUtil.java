@@ -22,7 +22,6 @@ import seedu.address.model.tag.UniqueTagList;
 import seedu.address.model.task.*;
 import seedu.address.storage.XmlSerializableAddressBook;
 
-
 import java.io.File;
 import java.io.IOException;
 import java.lang.reflect.Field;
@@ -66,15 +65,15 @@ public class TestUtil {
     private static Task[] getSamplePersonData() {
         try {
             return new Task[]{
-                    new Task(new TaskName("Ali Muster"), new DueDate("9482424"), new Priority("hans@google.com"), new Reminder("4th street"), new UniqueTagList()),
-                    new Task(new TaskName("Boris Mueller"), new DueDate("87249245"), new Priority("ruth@google.com"), new Reminder("81th street"), new UniqueTagList()),
-                    new Task(new TaskName("Carl Kurz"), new DueDate("95352563"), new Priority("heinz@yahoo.com"), new Reminder("wall street"), new UniqueTagList()),
-                    new Task(new TaskName("Daniel Meier"), new DueDate("87652533"), new Priority("cornelia@google.com"), new Reminder("10th street"), new UniqueTagList()),
-                    new Task(new TaskName("Elle Meyer"), new DueDate("9482224"), new Priority("werner@gmail.com"), new Reminder("michegan ave"), new UniqueTagList()),
-                    new Task(new TaskName("Fiona Kunz"), new DueDate("9482427"), new Priority("lydia@gmail.com"), new Reminder("little tokyo"), new UniqueTagList()),
-                    new Task(new TaskName("George Best"), new DueDate("9482442"), new Priority("anna@google.com"), new Reminder("4th street"), new UniqueTagList()),
-                    new Task(new TaskName("Hoon Meier"), new DueDate("8482424"), new Priority("stefan@mail.com"), new Reminder("little india"), new UniqueTagList()),
-                    new Task(new TaskName("Ida Mueller"), new DueDate("8482131"), new Priority("hans@google.com"), new Reminder("chicago ave"), new UniqueTagList())
+                    new Task(new TaskName("Find Ali"), new DueDate("20-11-2016 14:00"), new Priority("1"), new Reminder("20-11-2016 14:00"), new UniqueTagList()),
+                    new Task(new TaskName("Find Boris"), new DueDate("31-12-2016 14:00"), new Priority("3"), new Reminder("31-12-2016 14:00"), new UniqueTagList()),
+                    new Task(new TaskName("Find Carl"), new DueDate("31-12-2016 14:00"), new Priority("0"), new Reminder("20-11-2016 14:00"), new UniqueTagList()),
+                    new Task(new TaskName("Find Daniel"), new DueDate("31-12-2016 19:00"), new Priority("1"), new Reminder("31-12-2016 18:00"), new UniqueTagList()),
+                    new Task(new TaskName("Find Elle"), new DueDate("31-12-2016 14:00"), new Priority("2"), new Reminder("20-12-2016 14:00"), new UniqueTagList()),
+                    new Task(new TaskName("Find Fiona"), new DueDate("31-12-2016 14:00"), new Priority("3"), new Reminder("28-11-2016 14:00"), new UniqueTagList()),
+                    new Task(new TaskName("Find George"), new DueDate("31-12-2016 14:00"), new Priority("0"), new Reminder("20-11-2016 14:00"), new UniqueTagList()),
+                    new Task(new TaskName("Find Hoon"), new DueDate("31-12-2018 14:00"), new Priority("2"), new Reminder("20-11-2017 14:00"), new UniqueTagList()),
+                    new Task(new TaskName("Find Ida"), new DueDate("31-12-2019 14:00"), new Priority("1"), new Reminder("20-11-2018 14:00"), new UniqueTagList())
             };
         } catch (IllegalValueException e) {
             assert false;
@@ -368,5 +367,4 @@ public class TestUtil {
 
         return collect.toArray(new Tag[split.length]);
     }
-
 }

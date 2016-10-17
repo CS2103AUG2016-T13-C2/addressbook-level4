@@ -97,7 +97,12 @@ public abstract class AddressBookGuiTest {
      * Asserts the person shown in the card is same as the given person
      */
     public void assertMatching(ReadOnlyTask person, TaskCardHandle card) {
-        assertTrue(TestUtil.compareCardAndPerson(card, person));
+        if (TestUtil.compareCardAndPerson(card, person)) {
+        	System.out.println("assert matching works");
+        } else {
+        	System.out.println("assert matching not yet works");
+        }
+    	assertTrue(TestUtil.compareCardAndPerson(card, person));
     }
     
     /**
