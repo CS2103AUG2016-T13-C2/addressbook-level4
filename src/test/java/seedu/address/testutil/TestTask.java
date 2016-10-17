@@ -6,52 +6,52 @@ import seedu.address.model.task.*;
 /**
  * A mutable person object. For testing only.
  */
-public class TestPerson implements ReadOnlyTask {
+public class TestTask implements ReadOnlyTask {
 
-    private TaskName name;
-    private Reminder address;
-    private Priority email;
-    private DueDate phone;
+    private TaskName taskName;
+    private Reminder reminder;
+    private Priority priority;
+    private DueDate dueDate;
     private UniqueTagList tags;
 
-    public TestPerson() {
+    public TestTask() {
         tags = new UniqueTagList();
     }
 
-    public void setName(TaskName name) {
-        this.name = name;
+    public void setTaskName(TaskName name) {
+        this.taskName = name;
     }
 
-    public void setAddress(Reminder address) {
-        this.address = address;
+    public void setReminder(Reminder reminder) {
+        this.reminder = reminder;
     }
 
-    public void setEmail(Priority email) {
-        this.email = email;
+    public void setPriority(Priority priority) {
+        this.priority = priority;
     }
 
-    public void setPhone(DueDate phone) {
-        this.phone = phone;
+    public void setDueDate(DueDate dueDate) {
+        this.dueDate = dueDate;
     }
 
     @Override
     public TaskName getName() {
-        return name;
+        return taskName;
     }
 
     @Override
     public DueDate getDueDate() {
-        return phone;
+        return dueDate;
     }
 
     @Override
     public Priority getPriority() {
-        return email;
+        return priority;
     }
 
     @Override
     public Reminder getReminder() {
-        return address;
+        return reminder;
     }
 
     @Override
@@ -67,9 +67,9 @@ public class TestPerson implements ReadOnlyTask {
     public String getAddCommand() {
         StringBuilder sb = new StringBuilder();
         sb.append("add " + this.getName().fullName + " ");
-        sb.append("p/" + this.getDueDate().value + " ");
-        sb.append("e/" + this.getPriority().value + " ");
-        sb.append("a/" + this.getReminder().value + " ");
+        sb.append("d/" + this.getDueDate().value + " ");
+        sb.append("p/" + this.getPriority().value + " ");
+        sb.append("r/" + this.getReminder().value + " ");
         this.getTags().getInternalList().stream().forEach(s -> sb.append("t/" + s.tagName + " "));
         return sb.toString();
     }

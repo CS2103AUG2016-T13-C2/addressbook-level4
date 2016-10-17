@@ -1,7 +1,7 @@
 package seedu.address.testutil;
 
 import com.google.common.io.Files;
-import guitests.guihandles.PersonCardHandle;
+import guitests.guihandles.TaskCardHandle;
 import javafx.geometry.Bounds;
 import javafx.geometry.Point2D;
 import javafx.scene.Node;
@@ -21,6 +21,7 @@ import seedu.address.model.tag.Tag;
 import seedu.address.model.tag.UniqueTagList;
 import seedu.address.model.task.*;
 import seedu.address.storage.XmlSerializableAddressBook;
+
 
 import java.io.File;
 import java.io.IOException;
@@ -278,10 +279,10 @@ public class TestUtil {
      * @param personsToRemove The subset of persons.
      * @return The modified persons after removal of the subset from persons.
      */
-    public static TestPerson[] removePersonsFromList(final TestPerson[] persons, TestPerson... personsToRemove) {
-        List<TestPerson> listOfPersons = asList(persons);
+    public static TestTask[] removePersonsFromList(final TestTask[] persons, TestTask... personsToRemove) {
+        List<TestTask> listOfPersons = asList(persons);
         listOfPersons.removeAll(asList(personsToRemove));
-        return listOfPersons.toArray(new TestPerson[listOfPersons.size()]);
+        return listOfPersons.toArray(new TestTask[listOfPersons.size()]);
     }
 
 
@@ -290,7 +291,7 @@ public class TestUtil {
      * @param list original list to copy from
      * @param targetIndexInOneIndexedFormat e.g. if the first element to be removed, 1 should be given as index.
      */
-    public static TestPerson[] removePersonFromList(final TestPerson[] list, int targetIndexInOneIndexedFormat) {
+    public static TestTask[] removeTaskFromList(final TestTask[] list, int targetIndexInOneIndexedFormat) {
         return removePersonsFromList(list, list[targetIndexInOneIndexedFormat-1]);
     }
 
@@ -301,7 +302,7 @@ public class TestUtil {
      * @param index The index of the person to be replaced.
      * @return
      */
-    public static TestPerson[] replacePersonFromList(TestPerson[] persons, TestPerson person, int index) {
+    public static TestTask[] replacePersonFromList(TestTask[] persons, TestTask person, int index) {
         persons[index] = person;
         return persons;
     }
@@ -312,11 +313,28 @@ public class TestUtil {
      * @param personsToAdd The persons that are to be appended behind the original array.
      * @return The modified array of persons.
      */
-    public static TestPerson[] addPersonsToList(final TestPerson[] persons, TestPerson... personsToAdd) {
-        List<TestPerson> listOfPersons = asList(persons);
+    public static TestTask[] addTasksToList(final TestTask[] persons, TestTask... personsToAdd) {
+        List<TestTask> listOfPersons = asList(persons);
         listOfPersons.addAll(asList(personsToAdd));
-        return listOfPersons.toArray(new TestPerson[listOfPersons.size()]);
+        return listOfPersons.toArray(new TestTask[listOfPersons.size()]);
     }
+    
+    /**
+     * Changes the attributes of a person.
+     * @param person to edit, task name and priority setting.
+     * @return TestPerson with modified details.
+     */
+    
+    public static TestTask editTaskAttributes(final TestTask person, TaskName name, Reminder address, Priority email, DueDate phone) {
+    	// I am still unsure how to incorporate tag list into testing.
+    	person.setTaskName(name);
+    	person.setReminder(address);
+    	person.setPriority(email);
+    	person.setDueDate(phone);
+    	
+    	return person;
+    }
+    
 
     private static <T> List<T> asList(T[] objs) {
         List<T> list = new ArrayList<>();
@@ -326,7 +344,7 @@ public class TestUtil {
         return list;
     }
 
-    public static boolean compareCardAndPerson(PersonCardHandle card, ReadOnlyTask person) {
+    public static boolean compareCardAndPerson(TaskCardHandle card, ReadOnlyTask person) {
         return card.isSamePerson(person);
     }
 
