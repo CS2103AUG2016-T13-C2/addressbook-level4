@@ -13,7 +13,7 @@ import seedu.address.model.task.Priority;
 import seedu.address.model.task.ReadOnlyTask;
 import seedu.address.model.task.Reminder;
 import seedu.address.model.task.Task;
-import seedu.address.model.task.TaskName;
+import seedu.address.model.task.Name;
 import seedu.address.model.task.UniqueTaskList.DuplicateTaskException;
 import seedu.address.model.task.UniqueTaskList.TaskNotFoundException;
 
@@ -48,7 +48,7 @@ public class EditCommand extends Command {
             tagSet.add(new Tag(tagName));
         }
         this.newParams = new Task(
-                new TaskName(name),
+                new Name(name),
                 new DueDate(duedate),
                 new Priority(priority),
                 new Reminder(reminder),

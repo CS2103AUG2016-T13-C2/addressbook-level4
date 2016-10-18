@@ -58,7 +58,7 @@ public class XmlAdaptedPerson {
         for (XmlAdaptedTag tag : tagged) {
             personTags.add(tag.toModelType());
         }
-        final TaskName name = new TaskName(this.name);
+        final Name name = new Name(this.name);
         final DueDate phone = new DueDate(this.phone);
         final Priority email = new Priority(this.email);
         final Reminder address = new Reminder(this.address);

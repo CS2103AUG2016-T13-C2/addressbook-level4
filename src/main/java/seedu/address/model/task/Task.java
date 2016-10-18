@@ -9,20 +9,18 @@ import java.util.Objects;
  * Represents a Task in the Lifekeeper.
  * Guarantees: details are present and not null, field values are validated.
  */
-public class Task implements ReadOnlyTask {
+public class Task  extends Activity implements ReadOnlyTask {
 
-    private TaskName name;
     private DueDate duedate;
     private Priority priority;
     private Reminder reminder;
     private boolean isCompleted;
 
-    private UniqueTagList tags;
 
     /**
      * Every field must be present and not null.
      */
-    public Task(TaskName name, DueDate dueDate, Priority priority, Reminder reminder, UniqueTagList tags) {
+    public Task(Name name, DueDate dueDate, Priority priority, Reminder reminder, UniqueTagList tags) {
         assert !CollectionUtil.isAnyNull(name, dueDate, priority, reminder, tags);
         this.name = name;
         this.duedate = dueDate;
@@ -40,11 +38,11 @@ public class Task implements ReadOnlyTask {
     }
 
     @Override
-    public TaskName getName() {
+    public Name getName() {
         return name;
     }
     
-    public void setName(TaskName name) {
+    public void setName(Name name) {
         this.name = name;
     }
 

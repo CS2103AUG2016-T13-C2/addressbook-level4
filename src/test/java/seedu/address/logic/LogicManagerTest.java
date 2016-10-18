@@ -162,7 +162,7 @@ public class LogicManagerTest {
     @Test
     public void execute_add_invalidPersonData() throws Exception {
         assertCommandBehavior(
-                "add []\\[;] p/12345 e/valid@e.mail a/valid, address", TaskName.MESSAGE_NAME_CONSTRAINTS);
+                "add []\\[;] p/12345 e/valid@e.mail a/valid, address", Name.MESSAGE_NAME_CONSTRAINTS);
         assertCommandBehavior(
                 "add Valid Name p/not_numbers e/valid@e.mail a/valid, address", DueDate.MESSAGE_DUEDATE_CONSTRAINTS);
         assertCommandBehavior(
@@ -383,7 +383,7 @@ public class LogicManagerTest {
     class TestDataHelper{
 
         Task adam() throws Exception {
-            TaskName name = new TaskName("Adam Brown");
+            Name name = new Name("Adam Brown");
             DueDate privatePhone = new DueDate("111111");
             Priority email = new Priority("adam@gmail.com");
             Reminder privateAddress = new Reminder("111, alpha street");
@@ -402,7 +402,7 @@ public class LogicManagerTest {
          */
         Task generatePerson(int seed) throws Exception {
             return new Task(
-                    new TaskName("Person " + seed),
+                    new Name("Person " + seed),
                     new DueDate("" + Math.abs(seed)),
                     new Priority(seed + "@email"),
                     new Reminder("House of " + seed),
@@ -501,7 +501,7 @@ public class LogicManagerTest {
          */
         Task generatePersonWithName(String name) throws Exception {
             return new Task(
-                    new TaskName(name),
+                    new Name(name),
                     new DueDate("1"),
                     new Priority("1@email"),
                     new Reminder("House of 1"),

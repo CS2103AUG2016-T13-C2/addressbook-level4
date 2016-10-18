@@ -30,13 +30,13 @@ public class TaskManager {
 		task.setCompletionStatus(isComplete);
 	}
 
-	private static TaskName updateTaskName(Task oldTask, Task newParams, String type) throws IllegalValueException {
-        TaskName newTaskName;
+	private static Name updateTaskName(Task oldTask, Task newParams, String type) throws IllegalValueException {
+        Name newTaskName;
 
         if (newParams.getName().toString().equals(NULL_ENTRY)&& type == "edit") {
-            newTaskName = new TaskName(oldTask.getName().toString());
+            newTaskName = new Name(oldTask.getName().toString());
         } else {
-            newTaskName = new TaskName(newParams.getName().toString());
+            newTaskName = new Name(newParams.getName().toString());
         }
 
         return newTaskName;

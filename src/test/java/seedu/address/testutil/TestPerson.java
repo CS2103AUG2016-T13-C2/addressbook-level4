@@ -8,7 +8,7 @@ import seedu.address.model.task.*;
  */
 public class TestPerson implements ReadOnlyTask {
 
-    private TaskName name;
+    private Name name;
     private Reminder address;
     private Priority email;
     private DueDate phone;
@@ -19,7 +19,7 @@ public class TestPerson implements ReadOnlyTask {
         tags = new UniqueTagList();
     }
 
-    public void setName(TaskName name) {
+    public void setName(Name name) {
         this.name = name;
     }
 
@@ -36,7 +36,7 @@ public class TestPerson implements ReadOnlyTask {
     }
 
     @Override
-    public TaskName getName() {
+    public Name getName() {
         return name;
     }
 

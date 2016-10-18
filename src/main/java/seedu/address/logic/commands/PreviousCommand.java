@@ -7,7 +7,7 @@ import seedu.address.model.task.Priority;
 import seedu.address.model.task.ReadOnlyTask;
 import seedu.address.model.task.Reminder;
 import seedu.address.model.task.Task;
-import seedu.address.model.task.TaskName;
+import seedu.address.model.task.Name;
 /** 
  * Carries information of previous command: Command word and task.
  */
@@ -30,7 +30,7 @@ public class PreviousCommand {
 		oldTask = null;
 		try {
 		updatedTask = new Task(
-                new TaskName(task.getName().toString()),
+                new Name(task.getName().toString()),
                 new DueDate(task.getDueDate().getCalendarValue()),
                 new Priority(task.getPriority().toString()),
                 new Reminder(task.getReminder().getCalendarValue()),
@@ -47,7 +47,7 @@ public class PreviousCommand {
         
         try {            
             oldTask = new Task(
-                new TaskName(originalTask.getName().toString()),
+                new Name(originalTask.getName().toString()),
                 new DueDate(originalTask.getDueDate().getCalendarValue()),
                 new Priority(originalTask.getPriority().toString()),
                 new Reminder(originalTask.getReminder().getCalendarValue()),
