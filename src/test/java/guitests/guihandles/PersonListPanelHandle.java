@@ -83,6 +83,7 @@ public class PersonListPanelHandle extends GuiHandle {
      * @param persons A list of person in the correct order.
      */
     public boolean isListMatching(int startPosition, ReadOnlyTask... persons) throws IllegalArgumentException {
+    	System.out.println("getlistview length: " + getListView().getItems().size());
         if (persons.length + startPosition != getListView().getItems().size()) {
             throw new IllegalArgumentException("List size mismatched\n" +
                     "Expected " + (getListView().getItems().size() - 1) + " persons");
@@ -103,9 +104,7 @@ public class PersonListPanelHandle extends GuiHandle {
     public TaskCardHandle navigateToPerson(String name) {
         guiRobot.sleep(500); //Allow a bit of time for the list to be updated
         final Optional<ReadOnlyTask> task = getListView().getItems().stream().filter(p -> p.getName().fullName.equals(name)).findAny();
-        
-  //      final Optional<ReadOnlyTask> task = getListView().getItems().stream().filter(p -> p.getPriority().value.equals("1")).findAny();
-        
+                
         if (!task.isPresent()) {
             throw new IllegalStateException("Name not found: " + name);
         }
@@ -156,7 +155,7 @@ public class PersonListPanelHandle extends GuiHandle {
     public TaskCardHandle getPersonCardHandle(ReadOnlyTask person) {
         Set<Node> nodes = getAllCardNodes();
         Optional<Node> personCardNode = nodes.stream()
-                .filter(n -> new TaskCardHandle(guiRobot, primaryStage, n).isSamePerson(person))
+                .filter(n -> new TaskCardHandle(guiRobot, primaryStage, n).isSameTask(person))
                 .findFirst();
         if (personCardNode.isPresent()) {
             return new TaskCardHandle(guiRobot, primaryStage, personCardNode.get());
