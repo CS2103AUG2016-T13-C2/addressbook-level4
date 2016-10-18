@@ -52,7 +52,23 @@ public class PersonCard extends UiPart{
         completion.setText(person.toStringCompletionStatus());
         if(person.getCompletionStatus() == true) {
         	cardPane.setStyle("-fx-background-color: springgreen;");
+        } else {
+        	switch (person.getPriority().value) {
+
+            case "1":
+                cardPane.setStyle("-fx-background-color: lightyellow;");
+                return;
+            case "2":
+            	cardPane.setStyle("-fx-background-color: moccasin;");
+            	return;
+            case "3":
+            	cardPane.setStyle("-fx-background-color: salmon;");
+            	return;
+            default:
+            	return;
+           	}
         }
+        
     }
 
     public HBox getLayout() {
