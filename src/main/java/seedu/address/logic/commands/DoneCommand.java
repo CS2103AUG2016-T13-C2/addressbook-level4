@@ -2,10 +2,10 @@ package seedu.address.logic.commands;
 
 import seedu.address.commons.core.Messages;
 import seedu.address.commons.core.UnmodifiableObservableList;
+import seedu.address.model.activity.Activity;
 import seedu.address.model.activity.ReadOnlyTask;
 import seedu.address.model.activity.UniqueTaskList.DuplicateTaskException;
 import seedu.address.model.activity.UniqueTaskList.TaskNotFoundException;
-import seedu.address.model.activity.task.Task;
 
 /**
  * Marks the completion of a task identified using it's last displayed index
@@ -42,7 +42,7 @@ public class DoneCommand extends Command {
 
 		if (taskToMark.getCompletionStatus() == false) {
 
-			Task unmarkedTask = new Task(taskToMark);
+			Activity unmarkedTask = new Activity(taskToMark);
 			boolean isComplete = true;
 			try {
 				model.markTask(unmarkedTask, isComplete);

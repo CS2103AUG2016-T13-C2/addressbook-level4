@@ -1,11 +1,11 @@
 package seedu.address.model;
 
 import seedu.address.commons.core.UnmodifiableObservableList;
+import seedu.address.model.activity.Activity;
 import seedu.address.model.activity.ReadOnlyTask;
 import seedu.address.model.activity.UniqueTaskList;
 import seedu.address.model.activity.UniqueTaskList.DuplicateTaskException;
 import seedu.address.model.activity.UniqueTaskList.TaskNotFoundException;
-import seedu.address.model.activity.task.Task;
 
 import java.util.Set;
 
@@ -23,23 +23,23 @@ public interface Model {
     void deleteTask(ReadOnlyTask target) throws UniqueTaskList.TaskNotFoundException;
 
     /** Adds the given task */
-    void addTask(Task person) throws UniqueTaskList.DuplicateTaskException;
+    void addTask(Activity person) throws UniqueTaskList.DuplicateTaskException;
     
     /** Edits the given task
      * @return The edited task
      */
-    Task editTask(Task oldTask, Task newParams) throws TaskNotFoundException, DuplicateTaskException;
+    Activity editTask(Activity oldTask, Activity newParams) throws TaskNotFoundException, DuplicateTaskException;
 
     /** Undo edit 
      * @return The original task before edit
      */
-    Task undoEditTask(Task oldTask, Task newParams) throws TaskNotFoundException, DuplicateTaskException;
+    Activity undoEditTask(Activity oldTask, Activity newParams) throws TaskNotFoundException, DuplicateTaskException;
     
     /** Returns the filtered task list as an {@code UnmodifiableObservableList<ReadOnlyTask>} */
     UnmodifiableObservableList<ReadOnlyTask> getFilteredTaskList();
     
     /** Returns the filtered task list as an {@code UnmodifiableObservableList<Task>} */
-    UnmodifiableObservableList<Task> getFilteredTaskListForEditing();
+    UnmodifiableObservableList<Activity> getFilteredTaskListForEditing();
 
     /** Updates the filter of the filtered task list to show all tasks */
     void updateFilteredListToShowAll();
@@ -48,7 +48,7 @@ public interface Model {
     void updateFilteredTaskList(Set<String> keywords);
 
     /** Marks task as completed **/
-	void markTask(Task unmarkedTask, boolean isComplete) throws TaskNotFoundException;
+	void markTask(Activity unmarkedTask, boolean isComplete) throws TaskNotFoundException;
 
     
 }

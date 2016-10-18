@@ -21,7 +21,6 @@ import seedu.address.model.activity.*;
 import seedu.address.model.activity.task.DueDate;
 import seedu.address.model.activity.task.Priority;
 import seedu.address.model.activity.task.Reminder;
-import seedu.address.model.activity.task.Task;
 import seedu.address.model.tag.Tag;
 import seedu.address.model.tag.UniqueTagList;
 import seedu.address.storage.XmlSerializableAddressBook;
@@ -64,20 +63,20 @@ public class TestUtil {
      */
     public static String SANDBOX_FOLDER = FileUtil.getPath("./src/test/data/sandbox/");
 
-    public static final Task[] samplePersonData = getSamplePersonData();
+    public static final Activity[] samplePersonData = getSamplePersonData();
 
-    private static Task[] getSamplePersonData() {
+    private static Activity[] getSamplePersonData() {
         try {
-            return new Task[]{
-                    new Task(new Name("Ali Muster"), new DueDate("9482424"), new Priority("hans@google.com"), new Reminder("4th street"), new UniqueTagList()),
-                    new Task(new Name("Boris Mueller"), new DueDate("87249245"), new Priority("ruth@google.com"), new Reminder("81th street"), new UniqueTagList()),
-                    new Task(new Name("Carl Kurz"), new DueDate("95352563"), new Priority("heinz@yahoo.com"), new Reminder("wall street"), new UniqueTagList()),
-                    new Task(new Name("Daniel Meier"), new DueDate("87652533"), new Priority("cornelia@google.com"), new Reminder("10th street"), new UniqueTagList()),
-                    new Task(new Name("Elle Meyer"), new DueDate("9482224"), new Priority("werner@gmail.com"), new Reminder("michegan ave"), new UniqueTagList()),
-                    new Task(new Name("Fiona Kunz"), new DueDate("9482427"), new Priority("lydia@gmail.com"), new Reminder("little tokyo"), new UniqueTagList()),
-                    new Task(new Name("George Best"), new DueDate("9482442"), new Priority("anna@google.com"), new Reminder("4th street"), new UniqueTagList()),
-                    new Task(new Name("Hoon Meier"), new DueDate("8482424"), new Priority("stefan@mail.com"), new Reminder("little india"), new UniqueTagList()),
-                    new Task(new Name("Ida Mueller"), new DueDate("8482131"), new Priority("hans@google.com"), new Reminder("chicago ave"), new UniqueTagList())
+            return new Activity[]{
+                    new Activity(new Name("Ali Muster"), new DueDate("9482424"), new Priority("hans@google.com"), new Reminder("4th street"), new UniqueTagList()),
+                    new Activity(new Name("Boris Mueller"), new DueDate("87249245"), new Priority("ruth@google.com"), new Reminder("81th street"), new UniqueTagList()),
+                    new Activity(new Name("Carl Kurz"), new DueDate("95352563"), new Priority("heinz@yahoo.com"), new Reminder("wall street"), new UniqueTagList()),
+                    new Activity(new Name("Daniel Meier"), new DueDate("87652533"), new Priority("cornelia@google.com"), new Reminder("10th street"), new UniqueTagList()),
+                    new Activity(new Name("Elle Meyer"), new DueDate("9482224"), new Priority("werner@gmail.com"), new Reminder("michegan ave"), new UniqueTagList()),
+                    new Activity(new Name("Fiona Kunz"), new DueDate("9482427"), new Priority("lydia@gmail.com"), new Reminder("little tokyo"), new UniqueTagList()),
+                    new Activity(new Name("George Best"), new DueDate("9482442"), new Priority("anna@google.com"), new Reminder("4th street"), new UniqueTagList()),
+                    new Activity(new Name("Hoon Meier"), new DueDate("8482424"), new Priority("stefan@mail.com"), new Reminder("little india"), new UniqueTagList()),
+                    new Activity(new Name("Ida Mueller"), new DueDate("8482131"), new Priority("hans@google.com"), new Reminder("chicago ave"), new UniqueTagList())
             };
         } catch (IllegalValueException e) {
             assert false;
@@ -101,7 +100,7 @@ public class TestUtil {
         }
     }
 
-    public static List<Task> generateSamplePersonData() {
+    public static List<Activity> generateSamplePersonData() {
         return Arrays.asList(samplePersonData);
     }
 

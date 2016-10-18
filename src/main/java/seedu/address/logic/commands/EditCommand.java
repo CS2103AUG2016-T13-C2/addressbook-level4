@@ -6,6 +6,7 @@ import java.util.Set;
 import seedu.address.commons.core.Messages;
 import seedu.address.commons.core.UnmodifiableObservableList;
 import seedu.address.commons.exceptions.IllegalValueException;
+import seedu.address.model.activity.Activity;
 import seedu.address.model.activity.Name;
 import seedu.address.model.activity.ReadOnlyTask;
 import seedu.address.model.activity.UniqueTaskList.DuplicateTaskException;
@@ -13,7 +14,6 @@ import seedu.address.model.activity.UniqueTaskList.TaskNotFoundException;
 import seedu.address.model.activity.task.DueDate;
 import seedu.address.model.activity.task.Priority;
 import seedu.address.model.activity.task.Reminder;
-import seedu.address.model.activity.task.Task;
 import seedu.address.model.tag.Tag;
 import seedu.address.model.tag.UniqueTagList;
 
@@ -32,7 +32,7 @@ public class EditCommand extends Command {
     
     public final int targetIndex;
     
-    public final Task newParams;
+    public final Activity newParams;
     
     /**
      * Set parameters to null if they are not provided.
@@ -47,7 +47,7 @@ public class EditCommand extends Command {
         for (String tagName : tags) {
             tagSet.add(new Tag(tagName));
         }
-        this.newParams = new Task(
+        this.newParams = new Activity(
                 new Name(name),
                 new DueDate(duedate),
                 new Priority(priority),
@@ -58,18 +58,18 @@ public class EditCommand extends Command {
 
     @Override
     public CommandResult execute() {
-        UnmodifiableObservableList<Task> lastShownList = model.getFilteredTaskListForEditing();
+        UnmodifiableObservableList<Activity> lastShownList = model.getFilteredTaskListForEditing();
 
         if (lastShownList.size() < targetIndex) {
             indicateAttemptToExecuteIncorrectCommand();
             return new CommandResult(Messages.MESSAGE_INVALID_TASK_DISPLAYED_INDEX);
         }
 
-        Task taskToEdit = lastShownList.get(targetIndex - 1);
+        Activity taskToEdit = lastShownList.get(targetIndex - 1);
         
         try {
-            Task oldTask = new Task(taskToEdit);
-            Task editedTask = new Task(model.editTask(taskToEdit, newParams));
+            Activity oldTask = new Activity(taskToEdit);
+            Activity editedTask = new Activity(model.editTask(taskToEdit, newParams));
             
             PreviousCommand editCommand = new PreviousCommand(COMMAND_WORD,oldTask,editedTask);
             PreviousCommandsStack.push(editCommand);

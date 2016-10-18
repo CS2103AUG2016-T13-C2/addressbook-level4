@@ -5,7 +5,6 @@ import seedu.address.model.activity.*;
 import seedu.address.model.activity.task.DueDate;
 import seedu.address.model.activity.task.Priority;
 import seedu.address.model.activity.task.Reminder;
-import seedu.address.model.activity.task.Task;
 import seedu.address.model.tag.Tag;
 import seedu.address.model.tag.UniqueTagList;
 
@@ -27,7 +26,7 @@ public class AddCommand extends Command {
     public static final String MESSAGE_SUCCESS = "New task added: %1$s";
     public static final String MESSAGE_DUPLICATE_TASK = "This task already exists in the Lifekeeper";
 
-    private final Task toAdd;
+    private final Activity toAdd;
 
     /**
      * Convenience constructor using raw values.
@@ -40,7 +39,7 @@ public class AddCommand extends Command {
         for (String tagName : tags) {
             tagSet.add(new Tag(tagName));
         }
-        this.toAdd = new Task(
+        this.toAdd = new Activity(
                 new Name(name),
                 new DueDate(duedate),
                 new Priority(priority),

@@ -5,7 +5,6 @@ import seedu.address.model.activity.*;
 import seedu.address.model.activity.task.DueDate;
 import seedu.address.model.activity.task.Priority;
 import seedu.address.model.activity.task.Reminder;
-import seedu.address.model.activity.task.Task;
 import seedu.address.model.tag.Tag;
 import seedu.address.model.tag.UniqueTagList;
 
@@ -57,7 +56,7 @@ public class XmlAdaptedPerson {
      *
      * @throws IllegalValueException if there were any data constraints violated in the adapted person
      */
-    public Task toModelType() throws IllegalValueException {
+    public Activity toModelType() throws IllegalValueException {
         final List<Tag> personTags = new ArrayList<>();
         for (XmlAdaptedTag tag : tagged) {
             personTags.add(tag.toModelType());
@@ -67,6 +66,6 @@ public class XmlAdaptedPerson {
         final Priority email = new Priority(this.email);
         final Reminder address = new Reminder(this.address);
         final UniqueTagList tags = new UniqueTagList(personTags);
-        return new Task(name, phone, email, address, tags);
+        return new Activity(name, phone, email, address, tags);
     }
 }

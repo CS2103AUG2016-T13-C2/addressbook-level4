@@ -4,11 +4,11 @@ import javafx.collections.transformation.FilteredList;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.commons.core.UnmodifiableObservableList;
 import seedu.address.commons.util.StringUtil;
+import seedu.address.model.activity.Activity;
 import seedu.address.model.activity.ReadOnlyTask;
 import seedu.address.model.activity.UniqueTaskList;
 import seedu.address.model.activity.UniqueTaskList.DuplicateTaskException;
 import seedu.address.model.activity.UniqueTaskList.TaskNotFoundException;
-import seedu.address.model.activity.task.Task;
 import seedu.address.commons.events.model.AddressBookChangedEvent;
 import seedu.address.commons.core.ComponentManager;
 
@@ -23,7 +23,7 @@ public class ModelManager extends ComponentManager implements Model {
     private static final Logger logger = LogsCenter.getLogger(ModelManager.class);
 
     private final AddressBook addressBook;
-    private final FilteredList<Task> filteredPersons;
+    private final FilteredList<Activity> filteredPersons;
 
     /**
      * Initializes a ModelManager with the given AddressBook
@@ -72,30 +72,30 @@ public class ModelManager extends ComponentManager implements Model {
     }
 
     @Override
-    public synchronized void addTask(Task person) throws UniqueTaskList.DuplicateTaskException {
+    public synchronized void addTask(Activity person) throws UniqueTaskList.DuplicateTaskException {
         addressBook.addPerson(person);
         updateFilteredListToShowAll();
         indicateAddressBookChanged();
     }
     
     @Override
-    public synchronized Task editTask(Task oldTask, Task newParams) throws TaskNotFoundException, DuplicateTaskException {
-        Task editedTask = addressBook.editTask(oldTask, newParams, "edit");
+    public synchronized Activity editTask(Activity oldTask, Activity newParams) throws TaskNotFoundException, DuplicateTaskException {
+        Activity editedTask = addressBook.editTask(oldTask, newParams, "edit");
         indicateAddressBookChanged();
         
         return editedTask;
     }
     
     @Override
-    public synchronized Task undoEditTask(Task oldTask, Task newParams) throws TaskNotFoundException, DuplicateTaskException {
-        Task editedTask = addressBook.editTask(oldTask, newParams, "undo");
+    public synchronized Activity undoEditTask(Activity oldTask, Activity newParams) throws TaskNotFoundException, DuplicateTaskException {
+        Activity editedTask = addressBook.editTask(oldTask, newParams, "undo");
         indicateAddressBookChanged();
         
         return editedTask;
     }
 
 	@Override
-	public synchronized void markTask(Task taskToMark, boolean isComplete) throws TaskNotFoundException {
+	public synchronized void markTask(Activity taskToMark, boolean isComplete) throws TaskNotFoundException {
 		addressBook.markTask(taskToMark, isComplete);
         updateFilteredListToShowAll();
         indicateAddressBookChanged();
@@ -110,7 +110,7 @@ public class ModelManager extends ComponentManager implements Model {
     }
     
     @Override
-    public UnmodifiableObservableList<Task> getFilteredTaskListForEditing() {
+    public UnmodifiableObservableList<Activity> getFilteredTaskListForEditing() {
         return new UnmodifiableObservableList<>(filteredPersons);
     }
 

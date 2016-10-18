@@ -1,12 +1,12 @@
 package seedu.address.logic.commands;
 
 import seedu.address.commons.exceptions.IllegalValueException;
+import seedu.address.model.activity.Activity;
 import seedu.address.model.activity.Name;
 import seedu.address.model.activity.ReadOnlyTask;
 import seedu.address.model.activity.task.DueDate;
 import seedu.address.model.activity.task.Priority;
 import seedu.address.model.activity.task.Reminder;
-import seedu.address.model.activity.task.Task;
 import seedu.address.model.tag.UniqueTagList;
 /** 
  * Carries information of previous command: Command word and task.
@@ -14,11 +14,11 @@ import seedu.address.model.tag.UniqueTagList;
 public class PreviousCommand {
 
 	public String COMMAND_WORD;
-	public Task updatedTask;
-	public Task oldTask;
+	public Activity updatedTask;
+	public Activity oldTask;
 
 	
-	public PreviousCommand(String command, Task task)
+	public PreviousCommand(String command, Activity task)
 	{
 		COMMAND_WORD = command;
 		updatedTask = task;
@@ -29,7 +29,7 @@ public class PreviousCommand {
 		COMMAND_WORD = command;
 		oldTask = null;
 		try {
-		updatedTask = new Task(
+		updatedTask = new Activity(
                 new Name(task.getName().toString()),
                 new DueDate(task.getDueDate().getCalendarValue()),
                 new Priority(task.getPriority().toString()),
@@ -43,10 +43,10 @@ public class PreviousCommand {
 	
 	public PreviousCommand(String command, ReadOnlyTask originalTask, ReadOnlyTask editedTask) {
         COMMAND_WORD = command;
-        updatedTask = new Task(editedTask);
+        updatedTask = new Activity(editedTask);
         
         try {            
-            oldTask = new Task(
+            oldTask = new Activity(
                 new Name(originalTask.getName().toString()),
                 new DueDate(originalTask.getDueDate().getCalendarValue()),
                 new Priority(originalTask.getPriority().toString()),
@@ -64,12 +64,12 @@ public class PreviousCommand {
 		return COMMAND_WORD;
 	}
 	
-	public Task getUpdatedTask()
+	public Activity getUpdatedTask()
 	{
 		return updatedTask;
 	}
 	  
-	public Task getOldTask()
+	public Activity getOldTask()
 	{
 	    return oldTask;
     }
