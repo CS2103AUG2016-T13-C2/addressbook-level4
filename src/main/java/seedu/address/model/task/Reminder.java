@@ -66,7 +66,7 @@ public class Reminder extends DateTime {
      */
 
     public String outputReminderDateAsString (String format) {
-    	SimpleDateFormat formatter = new SimpleDateFormat();
+    	SimpleDateFormat formatter = new SimpleDateFormat(format);
     	return formatter.format(this.getCalendarValue().getTime());
     }
     

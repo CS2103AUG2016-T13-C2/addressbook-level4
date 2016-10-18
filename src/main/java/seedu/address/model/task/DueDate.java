@@ -65,7 +65,7 @@ public class DueDate extends DateTime {
      */
     
     public String outputDueDateAsString (String format) {
-    	SimpleDateFormat formatter = new SimpleDateFormat();
+    	SimpleDateFormat formatter = new SimpleDateFormat(format);
     	return formatter.format(this.getCalendarValue().getTime());
     }
     
