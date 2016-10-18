@@ -1,5 +1,8 @@
-package seedu.address.model.task;
+package seedu.address.model.activity;
 
+import seedu.address.model.activity.task.DueDate;
+import seedu.address.model.activity.task.Priority;
+import seedu.address.model.activity.task.Reminder;
 import seedu.address.model.tag.UniqueTagList;
 
 /**

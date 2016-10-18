@@ -15,9 +15,13 @@ import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.ReadOnlyLifeKeeper;
+import seedu.address.model.activity.*;
+import seedu.address.model.activity.task.DueDate;
+import seedu.address.model.activity.task.Priority;
+import seedu.address.model.activity.task.Reminder;
+import seedu.address.model.activity.task.Task;
 import seedu.address.model.tag.Tag;
 import seedu.address.model.tag.UniqueTagList;
-import seedu.address.model.task.*;
 import seedu.address.storage.StorageManager;
 
 import java.util.ArrayList;

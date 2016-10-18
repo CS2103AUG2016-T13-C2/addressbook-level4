@@ -1,13 +1,13 @@
 package seedu.address.logic.commands;
 
 import seedu.address.commons.exceptions.IllegalValueException;
+import seedu.address.model.activity.Name;
+import seedu.address.model.activity.ReadOnlyTask;
+import seedu.address.model.activity.task.DueDate;
+import seedu.address.model.activity.task.Priority;
+import seedu.address.model.activity.task.Reminder;
+import seedu.address.model.activity.task.Task;
 import seedu.address.model.tag.UniqueTagList;
-import seedu.address.model.task.DueDate;
-import seedu.address.model.task.Priority;
-import seedu.address.model.task.ReadOnlyTask;
-import seedu.address.model.task.Reminder;
-import seedu.address.model.task.Task;
-import seedu.address.model.task.Name;
 /** 
  * Carries information of previous command: Command word and task.
  */

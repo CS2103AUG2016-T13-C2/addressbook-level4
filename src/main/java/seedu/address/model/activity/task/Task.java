@@ -1,6 +1,9 @@
-package seedu.address.model.task;
+package seedu.address.model.activity.task;
 
 import seedu.address.commons.util.CollectionUtil;
+import seedu.address.model.activity.Activity;
+import seedu.address.model.activity.Name;
+import seedu.address.model.activity.ReadOnlyTask;
 import seedu.address.model.tag.UniqueTagList;
 
 import java.util.Objects;

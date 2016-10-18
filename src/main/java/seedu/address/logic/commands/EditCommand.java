@@ -6,16 +6,16 @@ import java.util.Set;
 import seedu.address.commons.core.Messages;
 import seedu.address.commons.core.UnmodifiableObservableList;
 import seedu.address.commons.exceptions.IllegalValueException;
+import seedu.address.model.activity.Name;
+import seedu.address.model.activity.ReadOnlyTask;
+import seedu.address.model.activity.UniqueTaskList.DuplicateTaskException;
+import seedu.address.model.activity.UniqueTaskList.TaskNotFoundException;
+import seedu.address.model.activity.task.DueDate;
+import seedu.address.model.activity.task.Priority;
+import seedu.address.model.activity.task.Reminder;
+import seedu.address.model.activity.task.Task;
 import seedu.address.model.tag.Tag;
 import seedu.address.model.tag.UniqueTagList;
-import seedu.address.model.task.DueDate;
-import seedu.address.model.task.Priority;
-import seedu.address.model.task.ReadOnlyTask;
-import seedu.address.model.task.Reminder;
-import seedu.address.model.task.Task;
-import seedu.address.model.task.Name;
-import seedu.address.model.task.UniqueTaskList.DuplicateTaskException;
-import seedu.address.model.task.UniqueTaskList.TaskNotFoundException;
 
 public class EditCommand extends Command {
     

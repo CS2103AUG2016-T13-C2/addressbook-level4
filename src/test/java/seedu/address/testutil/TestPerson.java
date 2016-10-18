@@ -1,7 +1,10 @@
 package seedu.address.testutil;
 
+import seedu.address.model.activity.*;
+import seedu.address.model.activity.task.DueDate;
+import seedu.address.model.activity.task.Priority;
+import seedu.address.model.activity.task.Reminder;
 import seedu.address.model.tag.UniqueTagList;
-import seedu.address.model.task.*;
 
 /**
  * A mutable person object. For testing only.

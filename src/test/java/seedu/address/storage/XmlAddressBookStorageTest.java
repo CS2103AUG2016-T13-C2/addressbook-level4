@@ -9,7 +9,7 @@ import seedu.address.commons.exceptions.DataConversionException;
 import seedu.address.commons.util.FileUtil;
 import seedu.address.model.AddressBook;
 import seedu.address.model.ReadOnlyLifeKeeper;
-import seedu.address.model.task.Task;
+import seedu.address.model.activity.task.Task;
 import seedu.address.testutil.TypicalTestPersons;
 
 import java.io.IOException;

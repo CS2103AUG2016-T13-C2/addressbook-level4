@@ -1,4 +1,4 @@
-package seedu.address.model.task;
+package seedu.address.model.activity.task;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -8,6 +8,7 @@ import java.util.Date;
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.commons.util.DateUtil;
 import seedu.address.commons.util.DateValidation;
+import seedu.address.model.activity.DateTime;
 
 /**
  * Represents a Task's DueDate in the Lifekeeper. Guarantees: immutable; is
