@@ -54,6 +54,7 @@ public class AddCommandTest extends AddressBookGuiTest {
         System.out.println("before" + currentList.length);
         TestTask[] expectedList = TestUtil.addTasksToList(currentList, taskToAdd);
         System.out.println("after" + expectedList.length);
+        //taskListPanel is supposed to have 7 sample tasks, but they are missing. thus the assertTrue is failing.
         assertTrue(taskListPanel.isListMatching(expectedList));
     }
     /*

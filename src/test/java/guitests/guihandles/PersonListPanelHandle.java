@@ -84,6 +84,8 @@ public class PersonListPanelHandle extends GuiHandle {
      */
     public boolean isListMatching(int startPosition, ReadOnlyTask... persons) throws IllegalArgumentException {
     	System.out.println("getlistview length: " + getListView().getItems().size());
+    	//getListView() is supposed to have already 7 sample tasks inside, because the 7 sample tasks have been initialised already, by "LoadAddressBookWithSampleData"
+    	//but somehow they aer not being initialised. not sure if it is because of the date format changes.
         if (persons.length + startPosition != getListView().getItems().size()) {
             throw new IllegalArgumentException("List size mismatched\n" +
                     "Expected " + (getListView().getItems().size() - 1) + " persons");
