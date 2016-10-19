@@ -2,9 +2,11 @@ package seedu.address.logic.commands;
 
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.activity.*;
+import seedu.address.model.activity.event.Event;
 import seedu.address.model.activity.task.DueDate;
 import seedu.address.model.activity.task.Priority;
 import seedu.address.model.activity.task.Reminder;
+import seedu.address.model.activity.task.Task;
 import seedu.address.model.tag.Tag;
 import seedu.address.model.tag.UniqueTagList;
 
@@ -25,7 +27,8 @@ public class AddCommand extends Command {
 
     public static final String MESSAGE_SUCCESS = "New task added: %1$s";
     public static final String MESSAGE_DUPLICATE_TASK = "This task already exists in the Lifekeeper";
-
+    public static final String MESSAGE_INVALID_ACTIVITY = "Activity must not have both start time and duedate";
+    
     private final Activity toAdd;
 
     /**
@@ -33,20 +36,38 @@ public class AddCommand extends Command {
      *
      * @throws IllegalValueException if any of the raw values are invalid
      */
-    public AddCommand(String name, String duedate, String priority, String reminder, Set<String> tags)
+    public AddCommand(String name, String duedate, String priority, String start, String end, String reminder, Set<String> tags)
             throws IllegalValueException {
         final Set<Tag> tagSet = new HashSet<>();
         for (String tagName : tags) {
             tagSet.add(new Tag(tagName));
         }
-        this.toAdd = new Activity(
+        
+String type = identifyActivityType(duedate,priority,start,end);
+        
+if(type == "task"){
+    
+        this.toAdd = new Task(
                 new Name(name),
                 new DueDate(duedate),
                 new Priority(priority),
                 new Reminder(reminder),
                 new UniqueTagList(tagSet)
         );
-    }
+} else if(type == "event") {
+    
+    this.toAdd = new Event(
+            new Name(name),
+            new StartTime(start),
+            new EndTime(end),
+            new Reminder(reminder),
+            new UniqueTagList(tagSet)
+    );
+    
+}
+
+
+}
 
     @Override
     public CommandResult execute() {
@@ -64,4 +85,10 @@ public class AddCommand extends Command {
 
     }
 
+    private String identifyActivityType (String duedate, String priority, String start, String end) 
+            throws IllegalValueException {
+                return end;
+        
+    };
+    
 }
