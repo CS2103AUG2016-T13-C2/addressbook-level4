@@ -7,9 +7,10 @@ import seedu.address.model.activity.Activity;
 import seedu.address.model.activity.Name;
 import seedu.address.model.activity.ReadOnlyEvent;
 import seedu.address.model.activity.task.Reminder;
+import seedu.address.model.activity.task.Task;
 import seedu.address.model.tag.UniqueTagList;
 
-public class Event extends Activity implements ReadOnlyEvent {
+public class Event extends Task implements ReadOnlyEvent {
 
     private Reminder reminder;
     private StartTime starttime;

@@ -109,6 +109,21 @@ public class DateUtil {
         return null;
     }
     
+    public static Date parseEvent(String date) {
+        Date validDate;
+        
+        for (SimpleDateFormat sdf : DATE_FORMATS) {
+            try {
+                validDate = sdf.parse(date);
+                if (date.equals(sdf.format(validDate))) {
+                    return validDate;
+                }
+            } catch (ParseException e) {
+                continue;
+            }
+        }        
+        return null;
+    }
     public static Date parseReminder(String date) {
         Date validDate;
         String dateform;

@@ -42,7 +42,6 @@ public class DueDate extends DateTime {
                                                     // tomorrow's/ date
                 date = DateValidation.DateTimeTomorrow(date);
             }
-
             Date taskDate = DATE_PARSER.parseDate(date);
 
             if (taskDate == null) {
