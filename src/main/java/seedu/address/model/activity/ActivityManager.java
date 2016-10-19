@@ -60,6 +60,13 @@ public class ActivityManager {
                 newTask.setCompletionStatus(oldTask.getCompletionStatus());
                 break;
             case "event":
+                newTask = new Event(
+                        updateTaskName(oldTask, newParams, type),
+                        updateStartTime((Event) oldTask, newParams, type),
+                        updateEndTime((Event) oldTask, newParams, type),
+                        updateReminder(oldTask, newParams, type),
+                        updateTags(oldTask, newParams)
+                        );
                 break;
             default:
                 assert false : "Invalid class type";
