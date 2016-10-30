@@ -12,6 +12,7 @@ public interface ReadOnlyEvent extends ReadOnlyActivity {
     StartTime getStartTime();
     EndTime getEndTime();
     
+    boolean isNotStarted();
     boolean isOngoing();
     boolean isOver();
 

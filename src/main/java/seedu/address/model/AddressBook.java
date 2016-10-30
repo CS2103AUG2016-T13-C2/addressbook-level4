@@ -8,6 +8,7 @@ import seedu.address.model.activity.ActivityManager;
 import seedu.address.model.activity.UniqueActivityList;
 import seedu.address.model.activity.UniqueActivityList.DuplicateTaskException;
 import seedu.address.model.activity.UniqueActivityList.TaskNotFoundException;
+import seedu.address.model.activity.event.UpcomingEvent;
 import seedu.address.model.activity.task.Task;
 import seedu.address.model.tag.Tag;
 import seedu.address.model.tag.UniqueTagList;

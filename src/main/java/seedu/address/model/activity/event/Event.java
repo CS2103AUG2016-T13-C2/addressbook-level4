@@ -10,7 +10,7 @@ import seedu.address.model.activity.ReadOnlyActivity;
 import seedu.address.model.activity.Reminder;
 import seedu.address.model.tag.UniqueTagList;
 //@@author A0131813R
-public class Event extends Activity implements ReadOnlyEvent{
+public class Event extends Activity implements ReadOnlyEvent, Comparable<Event>{
 
     private StartTime startTime;
     private EndTime endTime;
@@ -46,6 +46,16 @@ public class Event extends Activity implements ReadOnlyEvent{
     
     public void setEndTime(EndTime endtime) {
         this.endTime= endtime;
+    }
+    
+    /**
+     * Checks if this event has not started.
+     * @return true if the current time is before the start time.
+     */
+    @Override
+    public boolean isNotStarted() {
+        Date now = Calendar.getInstance().getTime();
+        return now.before(startTime.getCalendarValue().getTime());
     }
     
     /**
@@ -94,6 +104,13 @@ public class Event extends Activity implements ReadOnlyEvent{
                     && ((Event) other).getEndTime().equals(this.getEndTime())
                     && ((Event) other).getReminder().equals(this.getReminder()));
         }
+    }
+    
+    //Compares event by the start date.
+    @Override
+    public int compareTo(Event other) {
+        return this.startTime.getCalendarValue().getTime()
+                .compareTo(((Event) other).startTime.getCalendarValue().getTime());
     }
     
     @Override
