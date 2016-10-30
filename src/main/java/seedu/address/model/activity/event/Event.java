@@ -4,6 +4,7 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.Objects;
 
+import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.activity.Activity;
 import seedu.address.model.activity.Name;
 import seedu.address.model.activity.ReadOnlyActivity;
@@ -71,13 +72,16 @@ public class Event extends Activity implements ReadOnlyEvent{
     
     @Override
     public String toStringCompletionStatus() {
+        String message = "";
         if(this.isOver()) {
-            return "Event Over";
+            recurringEvent();
+            message =  "Event Over";
         } else if (this.isOngoing()) {
-            return "Event Ongoing";
-        } else {
-            return "";
+            message =  "Event Ongoing";
         }
+        if(this.startTime.recurring)
+            message = message.concat(" Recurring");
+        return message;
     }
     
     @Override
@@ -106,5 +110,35 @@ public class Event extends Activity implements ReadOnlyEvent{
     public String toString() {
         return getAsText();
     }
+    
+    public void recurringEvent(){ 
+        if(this.reminder.recurring && Calendar.getInstance().after(this.reminder.value)){
+                String[] recur;
+                recur = this.reminder.RecurringMessage.split(" ", 2);
+                String date = recur [1];
+                try {
+                    this.reminder.setDate(date);
+                } catch (IllegalValueException e) {
+                    e.printStackTrace();
+                }}    
+        if(this.startTime.recurring && Calendar.getInstance().after(this.startTime.value)){
+            String[] recur;
+            recur = this.startTime.RecurringMessage.split(" ", 2);
+            String date = recur [1];
+            try {
+                this.startTime.setDate(date);
+            } catch (IllegalValueException e) {
+                e.printStackTrace();
+            }} 
+        if(this.endTime.recurring && Calendar.getInstance().after(this.endTime.value)){
+            String[] recur;
+            recur = this.endTime.RecurringMessage.split(" ", 2);
+            String date = recur [1];
+            try {
+                this.endTime.setDate(date);
+            } catch (IllegalValueException e) {
+                e.printStackTrace();
+            }} 
+    };
     
 }

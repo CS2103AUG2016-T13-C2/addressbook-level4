@@ -4,6 +4,7 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.Objects;
 
+import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.commons.util.CollectionUtil;
 import seedu.address.model.activity.Activity;
 import seedu.address.model.activity.Name;
@@ -69,15 +70,18 @@ public class Task extends Activity implements ReadOnlyTask {
     
     @Override
     public String toStringCompletionStatus() {
+        String message="";
+        recurringTask();
         if(isCompleted) {
-            return "Completed";
+            message = "Completed";
         } else if (!isCompleted && this.isDueDateApproaching()) {
-            return "Task Deadline Approaching";
+            message = "Task Deadline Approaching";
         } else if(!isCompleted && this.hasPassedDueDate()){
-            return "Task Overdue!";
-        }
-        
-        return "";  
+            message =  "Task Overdue!";
+        }else recurringTask();
+        if(duedate.recurring)
+            message = message.concat(" Recurring");
+        return message;  
     }
     
     /**
@@ -140,4 +144,27 @@ public class Task extends Activity implements ReadOnlyTask {
     public String toString() {
         return getAsText();
     }
+    
+    public void recurringTask(){ 
+        if(this.reminder.recurring && Calendar.getInstance().after(this.reminder.value)){
+                String[] recur;
+                isCompleted = false;
+                recur = this.reminder.RecurringMessage.split(" ", 2);
+                String date = recur [1];
+                try {
+                    this.reminder.setDate(date);
+                } catch (IllegalValueException e) {
+                    e.printStackTrace();
+                }}    
+        if(this.duedate.recurring && Calendar.getInstance().after(this.duedate.value)){
+            String[] recur;
+            isCompleted = false;
+            recur = this.duedate.RecurringMessage.split(" ", 2);
+            String date = recur [1];
+            try {
+                this.duedate.setDate(date);
+            } catch (IllegalValueException e) {
+                e.printStackTrace();
+            }} 
+    };
 }

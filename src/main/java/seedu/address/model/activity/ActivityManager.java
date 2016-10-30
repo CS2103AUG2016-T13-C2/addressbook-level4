@@ -134,19 +134,24 @@ public class ActivityManager {
     private static DueDate updateDueDate(Activity oldTask, Activity newParams, String type) throws IllegalValueException {
         DueDate newDueDate;
         
+        
         if (!newParams.getClass().getSimpleName().equalsIgnoreCase("task")) {
-            return new DueDate(((Task) oldTask).getDueDate().getCalendarValue());
+            return new DueDate(((Task) oldTask).getDueDate().RecurringMessage);
         }
 
         if (((Task) newParams).getDueDate().toString().equals(NULL_ENTRY)&& type.equals("edit")) {
             if (oldTask.getClass().getSimpleName().equalsIgnoreCase("activity")) {
                 newDueDate = new DueDate("");
             } else {
-                newDueDate = new DueDate(((Task) oldTask).getDueDate().getCalendarValue());
+                newDueDate = new DueDate(((Task) oldTask).getDueDate().RecurringMessage);
             }
         } else {
-            newDueDate = new DueDate(((Task) newParams).getDueDate().getCalendarValue());
+            newDueDate = new DueDate(((Task) newParams).getDueDate().RecurringMessage);
         }
+        if(((Task)oldTask).getDueDate().recurring){
+            newDueDate.recurring=true;
+        }
+
 
         return newDueDate;
     }
@@ -177,11 +182,13 @@ public class ActivityManager {
         Reminder newReminder;
 
         if (newParams.getReminder().toString().equals(NULL_ENTRY)&& type.equals("edit")) {
-            newReminder = new Reminder(oldTask.getReminder().getCalendarValue());
+            newReminder = new Reminder(oldTask.getReminder().RecurringMessage);
         } else {
-            newReminder = new Reminder(newParams.getReminder().getCalendarValue());
+            newReminder = new Reminder(newParams.getReminder().RecurringMessage);
         }
-
+        if((oldTask).getReminder().recurring){
+            newReminder.recurring=true;
+        }
         return newReminder;
     }
     
