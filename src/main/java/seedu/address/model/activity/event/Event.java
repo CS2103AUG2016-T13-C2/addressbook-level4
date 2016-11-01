@@ -54,9 +54,7 @@ public class Event extends Activity implements ReadOnlyEvent{
      */
     @Override
     public boolean isOngoing() {
-        Date now = Calendar.getInstance().getTime();
-        return now.after(startTime.getCalendarValue().getTime())
-                && now.before(endTime.getCalendarValue().getTime());
+        return startTime.isBeforeNow() && endTime.isAfterNow();
     }
 
     /**
@@ -65,8 +63,7 @@ public class Event extends Activity implements ReadOnlyEvent{
      */
     @Override
     public boolean isOver() {
-        Date now = Calendar.getInstance().getTime();
-        return now.after(endTime.getCalendarValue().getTime());
+        return endTime.isBeforeNow();
     }
     
     @Override
