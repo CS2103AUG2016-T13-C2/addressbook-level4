@@ -25,10 +25,12 @@ public class AddressBook implements ReadOnlyLifeKeeper {
 
     private final UniqueActivityList activities;
     private final UniqueTagList tags;
+    private final UpcomingEvent nextEvents;
 
     {
         activities = new UniqueActivityList();
         tags = new UniqueTagList();
+        nextEvents = new UpcomingEvent();
     }
 
     public AddressBook() {}
@@ -37,14 +39,15 @@ public class AddressBook implements ReadOnlyLifeKeeper {
      * Persons and Tags are copied into this addressbook
      */
     public AddressBook(ReadOnlyLifeKeeper toBeCopied) {
-        this(toBeCopied.getUniquePersonList(), toBeCopied.getUniqueTagList());
+        this(toBeCopied.getUniquePersonList(), toBeCopied.getUniqueTagList(), ((AddressBook) toBeCopied).getUpcomingEvents());
     }
 
     /**
      * Persons and Tags are copied into this addressbook
      */
-    public AddressBook(UniqueActivityList persons, UniqueTagList tags) {
+    public AddressBook(UniqueActivityList persons, UniqueTagList tags, UpcomingEvent nextEvents) {
         resetData(persons.getInternalList(), tags.getInternalList());
+        nextEvents = new UpcomingEvent(persons.getInternalList());
     }
 
     public static ReadOnlyLifeKeeper getEmptyAddressBook() {
@@ -182,7 +185,10 @@ public class AddressBook implements ReadOnlyLifeKeeper {
     public UniqueTagList getUniqueTagList() {
         return this.tags;
     }
-
+    
+    public UpcomingEvent getUpcomingEvents() {
+        return this.nextEvents;
+    }
 
     @Override
     public boolean equals(Object other) {

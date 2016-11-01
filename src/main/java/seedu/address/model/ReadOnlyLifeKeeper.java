@@ -3,6 +3,7 @@ package seedu.address.model;
 
 import seedu.address.model.activity.ReadOnlyActivity;
 import seedu.address.model.activity.UniqueActivityList;
+import seedu.address.model.activity.event.UpcomingEvent;
 import seedu.address.model.tag.Tag;
 import seedu.address.model.tag.UniqueTagList;
 
