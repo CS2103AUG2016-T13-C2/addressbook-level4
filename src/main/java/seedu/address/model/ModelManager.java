@@ -1,6 +1,7 @@
 package seedu.address.model;
 
 import javafx.collections.transformation.FilteredList;
+import javafx.collections.transformation.SortedList;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.commons.core.UnmodifiableObservableList;
 import seedu.address.commons.util.StringUtil;
@@ -16,25 +17,31 @@ import seedu.address.commons.events.model.AddressBookChangedEvent;
 import seedu.address.commons.events.model.SaveEvent;
 import seedu.address.commons.core.ComponentManager;
 
+import java.util.Calendar;
+import java.util.Collection;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.Iterator;
+import java.util.List;
 import java.util.Set;
 import java.util.logging.Logger;
 
 import com.google.common.eventbus.Subscribe;
 
 /**
- * Represents the in-memory model of the address book data.
- * All changes to any model should be synchronized.
+ * Represents the in-memory model of the address book data. All changes to any
+ * model should be synchronized.
  */
 public class ModelManager extends ComponentManager implements Model {
     private static final Logger logger = LogsCenter.getLogger(ModelManager.class);
 
     private final AddressBook addressBook;
-    private final FilteredList<Activity> filteredPersons;
+    private final FilteredList<Activity> filteredEntries;
     private final FilteredList<Tag> filteredTags;
 
     /**
-     * Initializes a ModelManager with the given AddressBook
-     * AddressBook and its variables should not be null
+     * Initializes a ModelManager with the given AddressBook AddressBook and its
+     * variables should not be null
      */
     public ModelManager(AddressBook src, UserPrefs userPrefs) {
         super();
@@ -44,7 +51,7 @@ public class ModelManager extends ComponentManager implements Model {
         logger.fine("Initializing with address book: " + src + " and user prefs " + userPrefs);
 
         addressBook = new AddressBook(src);
-        filteredPersons = new FilteredList<>(addressBook.getAllEntries());
+        filteredEntries = new FilteredList<>(addressBook.getAllEntries());
         filteredTags = new FilteredList<>(addressBook.getTag());
     }
 
@@ -54,7 +61,7 @@ public class ModelManager extends ComponentManager implements Model {
 
     public ModelManager(ReadOnlyLifeKeeper initialData, UserPrefs userPrefs) {
         addressBook = new AddressBook(initialData);
-        filteredPersons = new FilteredList<>(addressBook.getAllEntries());
+        filteredEntries = new FilteredList<>(addressBook.getAllEntries());
         filteredTags = new FilteredList<>(addressBook.getTag());
     }
 
@@ -85,107 +92,119 @@ public class ModelManager extends ComponentManager implements Model {
         addressBook.addPerson(person);
         updateFilteredListToShowAll();
         indicateAddressBookChanged();
-    }       
-
-	@Override
-	public void undoDelete(int index, Activity taskToAdd) throws UniqueActivityList.DuplicateTaskException {
-		addressBook.addPerson(index, taskToAdd);
-		updateFilteredListToShowAll();
-		indicateAddressBookChanged();
-
-	}
-
-    //@@author A0125680H
-    @Override
-    public synchronized Activity editTask(Activity oldTask, Activity newParams) throws TaskNotFoundException, DuplicateTaskException {
-        Activity editedTask = addressBook.editTask(oldTask, newParams, "edit");
-        indicateAddressBookChanged();
-        
-        return editedTask;
-    }
-    
-    @Override
-    public synchronized Activity undoEditTask(Activity oldTask, Activity newParams) throws TaskNotFoundException, DuplicateTaskException {
-        Activity editedTask = addressBook.editTask(oldTask, newParams, "undo");
-        indicateAddressBookChanged();
-        
-        return editedTask;
     }
 
-	@Override
-	public synchronized void markTask(Activity taskToMark, boolean isComplete) throws TaskNotFoundException {
-		addressBook.markTask(taskToMark, isComplete);
+    @Override
+    public void undoDelete(int index, Activity taskToAdd) throws UniqueActivityList.DuplicateTaskException {
+        addressBook.addPerson(index, taskToAdd);
         updateFilteredListToShowAll();
         indicateAddressBookChanged();
-		
-	}
-	
-	@Subscribe
-	public void indicateSaveLocChanged(SaveEvent event) {
-	    indicateAddressBookChanged();
-	}
-    
-    //=========== Filtered Person List Accessors ===============================================================
+
+    }
+
+    // @@author A0125680H
+    @Override
+    public synchronized Activity editTask(Activity oldTask, Activity newParams)
+            throws TaskNotFoundException, DuplicateTaskException {
+        Activity editedTask = addressBook.editTask(oldTask, newParams, "edit");
+        indicateAddressBookChanged();
+
+        return editedTask;
+    }
+
+    @Override
+    public synchronized Activity undoEditTask(Activity oldTask, Activity newParams)
+            throws TaskNotFoundException, DuplicateTaskException {
+        Activity editedTask = addressBook.editTask(oldTask, newParams, "undo");
+        indicateAddressBookChanged();
+
+        return editedTask;
+    }
+
+    @Override
+    public synchronized void markTask(Activity taskToMark, boolean isComplete) throws TaskNotFoundException {
+        addressBook.markTask(taskToMark, isComplete);
+        updateFilteredListToShowAll();
+        indicateAddressBookChanged();
+
+    }
+
+    @Subscribe
+    public void indicateSaveLocChanged(SaveEvent event) {
+        indicateAddressBookChanged();
+    }
+
+    // =========== Filtered Person List Accessors
+    // ===============================================================
 
     @Override
     public UnmodifiableObservableList<ReadOnlyActivity> getFilteredTaskList() {
-        return new UnmodifiableObservableList<>(filteredPersons);
-    }
-    
-    @Override
-    public UnmodifiableObservableList<Activity> getFilteredTaskListForEditing() {
-        return new UnmodifiableObservableList<>(filteredPersons);
-    }
-  //@@author A0131813R
-    @Override
-    public void updateFilteredListToShowAll() {
-        filteredPersons.setPredicate(p->
-        p.getCompletionStatus() == false && p.getisOver() == false);
-    }
-    
-    @Override
-    public void updateFilteredByTagListToShowAll(String tag) {
-        filteredPersons.setPredicate(p->
-        p.getTags().contains1(tag));
-    }
-    
-    @Override
-    public void updateFilteredTaskListToShowAll() {
-        filteredPersons.setPredicate(p->
-        p.getClass().getSimpleName().equalsIgnoreCase("Task"));
-    }
-    
-    @Override
-    public void updateFilteredDoneListToShowAll() {
-        filteredPersons.setPredicate(p->
-        p.getCompletionStatus() == true || p.getisOver() == true);
-    }
-    
-    @Override
-    public void updateFilteredActivityListToShowAll() {
-        filteredPersons.setPredicate(p->
-        p.getClass().getSimpleName().equalsIgnoreCase("Activity"));
-    }
-    
-    @Override
-    public void updateFilteredEventListToShowAll() {
-        filteredPersons.setPredicate(p->
-        p.getClass().getSimpleName().equalsIgnoreCase("Event"));
+        return new UnmodifiableObservableList<>(filteredEntries);
     }
 
     @Override
-    public void updateFilteredTaskList(Set<String> keywords){
+    public UnmodifiableObservableList<Activity> getFilteredTaskListForEditing() {
+        return new UnmodifiableObservableList<>(filteredEntries);
+    }
+
+    // @@author A0131813R
+    @Override
+    public void updateFilteredListToShowAll() {
+        filteredEntries.setPredicate(p -> p.getCompletionStatus() == false && p.getisOver() == false);
+    }
+
+    public void updateSortedListToShowAll() {
+        filteredEntries.setPredicate(p -> p.getClass().getSimpleName().equalsIgnoreCase("Task"));
+        Collections.sort(filteredEntries, new Comparator<Activity>(){
+            public int compare (Activity a1, Activity a2){
+                if(a1.getClass().getSimpleName().equalsIgnoreCase("task"))
+                return ((Task)a1).getDueDate().value.compareTo(((Task)a2).getDueDate().value);
+                else 
+                    return a1.getName().toString().compareTo(a2.getName().toString());
+            }
+        });
+    }
+
+    @Override
+    public void updateFilteredByTagListToShowAll(String tag) {
+        filteredEntries.setPredicate(p -> p.getTags().contains1(tag));
+    }
+
+    @Override
+    public void updateFilteredTaskListToShowAll() {
+        filteredEntries.setPredicate(p -> p.getClass().getSimpleName().equalsIgnoreCase("Task"));
+    }
+
+    @Override
+    public void updateFilteredDoneListToShowAll() {
+        filteredEntries.setPredicate(p -> p.getCompletionStatus() == true || p.getisOver() == true);
+    }
+
+    @Override
+    public void updateFilteredActivityListToShowAll() {
+        filteredEntries.setPredicate(p -> p.getClass().getSimpleName().equalsIgnoreCase("Activity"));
+    }
+
+    @Override
+    public void updateFilteredEventListToShowAll() {
+        filteredEntries.setPredicate(p -> p.getClass().getSimpleName().equalsIgnoreCase("Event"));
+    }
+
+    @Override
+    public void updateFilteredTaskList(Set<String> keywords) {
         updateFilteredPersonList(new PredicateExpression(new NameQualifier(keywords)));
     }
 
     private void updateFilteredPersonList(Expression expression) {
-        filteredPersons.setPredicate(expression::satisfies);
+        filteredEntries.setPredicate(expression::satisfies);
     }
-  //@@author
-    //========== Inner classes/interfaces used for filtering ==================================================
+    // @@author
+    // ========== Inner classes/interfaces used for filtering
+    // ==================================================
 
     interface Expression {
         boolean satisfies(ReadOnlyActivity person);
+
         String toString();
     }
 
@@ -210,6 +229,7 @@ public class ModelManager extends ComponentManager implements Model {
 
     interface Qualifier {
         boolean run(ReadOnlyActivity person);
+
         String toString();
     }
 
@@ -223,8 +243,7 @@ public class ModelManager extends ComponentManager implements Model {
         @Override
         public boolean run(ReadOnlyActivity person) {
             return nameKeyWords.stream()
-                    .filter(keyword -> StringUtil.containsIgnoreCase(person.getName().fullName, keyword))
-                    .findAny()
+                    .filter(keyword -> StringUtil.containsIgnoreCase(person.getName().fullName, keyword)).findAny()
                     .isPresent();
         }
 
@@ -233,9 +252,5 @@ public class ModelManager extends ComponentManager implements Model {
             return "name=" + String.join(", ", nameKeyWords);
         }
     }
-
-
-
-
 
 }
