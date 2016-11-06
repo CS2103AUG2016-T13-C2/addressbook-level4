@@ -58,20 +58,29 @@ public class AddressBook implements ReadOnlyLifeKeeper {
 //// list overwrite operations
 
     public ObservableList<Activity> getAllEntries() {
-        activities.getInternalList().sorted(new Comparator<Activity>(){
+//        activities.getInternalList().sorted(new Comparator<Activity>(){
+//            public int compare (Activity a1, Activity a2){
+//            return a1.getClass().getSimpleName().compareTo(a2.getClass().getSimpleName());
+//            }
+//        });
+        return  activities.getInternalList()
+                /*.sorted(new Comparator<Activity>(){
             public int compare (Activity a1, Activity a2){
-            return a1.getClass().getSimpleName().compareTo(a2.getClass().getSimpleName());
-            }
-        });
-        return  activities.getInternalList().sorted(new Comparator<Activity>(){
-            public int compare (Activity a1, Activity a2){
+                int index = a1.getClass().getSimpleName().compareTo(a2.getClass().getSimpleName());
+                if(index != 0)
+                    return index*-1;
                 if(a1.getClass().getSimpleName().equalsIgnoreCase("task")&&a2.getClass().getSimpleName().equalsIgnoreCase("task"))
-                    return ((Task)a1).getDueDate().value.compareTo(((Task)a2).getDueDate().value);
-                else if(a1.getClass().getSimpleName().equalsIgnoreCase("event") && a2.getClass().getSimpleName().equalsIgnoreCase("event"))
-                    return ((Event)a1).getStartTime().value.compareTo(((Event)a2).getStartTime().value);
+                    {if(((Task)a1).getDueDate().value==null)
+                        return Integer.MAX_VALUE;
+                    else if(((Task)a2).getDueDate().value==null)
+                        return Integer.MIN_VALUE;
+                else if(((Task)a1).getDueDate().value!=null && ((Task)a2).getDueDate().value!=null)
+                    return ((Task)a1).getDueDate().value.compareTo(((Task)a2).getDueDate().value);}
+                else {if(a1.getClass().getSimpleName().equalsIgnoreCase("event") && a2.getClass().getSimpleName().equalsIgnoreCase("event"))
+                    return ((Event)a1).getStartTime().value.compareTo(((Event)a2).getStartTime().value);}
                     return a1.getName().toString().compareTo(a2.getName().toString());
             }
-        });
+        })*/;
     }
     
     public ObservableList<Tag> getTag() {
