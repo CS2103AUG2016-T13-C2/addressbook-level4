@@ -36,7 +36,7 @@ public class ModelManager extends ComponentManager implements Model {
     private static final Logger logger = LogsCenter.getLogger(ModelManager.class);
 
     private final AddressBook addressBook;
-    private FilteredList<Activity> filteredEntries;
+    private final FilteredList<Activity> filteredEntries;
     private final FilteredList<Tag> filteredTags;
 
     /**
@@ -161,7 +161,7 @@ public class ModelManager extends ComponentManager implements Model {
 
     @Override
     public void updateFilteredTaskListToShowAll() {
-        filteredEntries.setPredicate(p -> p.getClass().getSimpleName().equalsIgnoreCase("Task"));
+        filteredEntries.setPredicate(p -> p.getClass().getSimpleName().equalsIgnoreCase("Task")&& p.getCompletionStatus()==false);
     }
 
     @Override
@@ -171,20 +171,20 @@ public class ModelManager extends ComponentManager implements Model {
 
     @Override
     public void updateFilteredActivityListToShowAll() {
-        filteredEntries.setPredicate(p -> p.getClass().getSimpleName().equalsIgnoreCase("Activity"));
+        filteredEntries.setPredicate(p -> p.getClass().getSimpleName().equalsIgnoreCase("Activity") &&  p.getCompletionStatus() == false);
     }
 
     @Override
     public void updateFilteredEventListToShowAll() {
-        filteredEntries.setPredicate(p -> p.getClass().getSimpleName().equalsIgnoreCase("Event"));
+        filteredEntries.setPredicate(p -> p.getClass().getSimpleName().equalsIgnoreCase("Event") && p.getisOver() == false);
     }
 
     @Override
     public void updateFilteredTaskList(Set<String> keywords) {
-        updateFilteredPersonList(new PredicateExpression(new NameQualifier(keywords)));
+        updateFilteredEntriesList(new PredicateExpression(new NameQualifier(keywords)));
     }
 
-    private void updateFilteredPersonList(Expression expression) {
+    private void updateFilteredEntriesList(Expression expression) {
         filteredEntries.setPredicate(expression::satisfies);
     }
     // @@author

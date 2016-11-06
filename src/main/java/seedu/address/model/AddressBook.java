@@ -19,8 +19,8 @@ import java.util.*;
 import java.util.stream.Collectors;
 
 /**
- * Wraps all data at the address-book level
- * Duplicates are not allowed (by .equals comparison)
+ * Wraps all data at the address-book level Duplicates are not allowed (by
+ * .equals comparison)
  */
 public class AddressBook implements ReadOnlyLifeKeeper {
 
@@ -34,7 +34,8 @@ public class AddressBook implements ReadOnlyLifeKeeper {
         nextReminders = new UpcomingReminders();
     }
 
-    public AddressBook() {}
+    public AddressBook() {
+    }
 
     /**
      * Persons and Tags are copied into this addressbook
@@ -55,34 +56,44 @@ public class AddressBook implements ReadOnlyLifeKeeper {
         return new AddressBook();
     }
 
-//// list overwrite operations
+    //// list overwrite operations
 
     public ObservableList<Activity> getAllEntries() {
-//        activities.getInternalList().sorted(new Comparator<Activity>(){
-//            public int compare (Activity a1, Activity a2){
-//            return a1.getClass().getSimpleName().compareTo(a2.getClass().getSimpleName());
-//            }
-//        });
-        return  activities.getInternalList()
-                /*.sorted(new Comparator<Activity>(){
-            public int compare (Activity a1, Activity a2){
-                int index = a1.getClass().getSimpleName().compareTo(a2.getClass().getSimpleName());
-                if(index != 0)
-                    return index*-1;
-                if(a1.getClass().getSimpleName().equalsIgnoreCase("task")&&a2.getClass().getSimpleName().equalsIgnoreCase("task"))
-                    {if(((Task)a1).getDueDate().value==null)
+        // activities.getInternalList().sorted(new Comparator<Activity>(){
+        // public int compare (Activity a1, Activity a2){
+        // return
+        // a1.getClass().getSimpleName().compareTo(a2.getClass().getSimpleName());
+        // }
+        // });
+        return activities.getInternalList().sorted(new Comparator<Activity>() {
+            public int compare(Activity a1, Activity a2) {
+                if (a1.getClass().getSimpleName().equalsIgnoreCase("activity"))
+                    return Integer.MAX_VALUE;
+                if (a2.getClass().getSimpleName().equalsIgnoreCase("activity"))
+                    return Integer.MIN_VALUE;
+                if (a1.getClass().getSimpleName().equalsIgnoreCase("task")
+                        && a2.getClass().getSimpleName().equalsIgnoreCase("task"))
+                    {if (((Task) a1).getDueDate().value == null)
                         return Integer.MAX_VALUE;
-                    else if(((Task)a2).getDueDate().value==null)
+                    else if (((Task) a2).getDueDate().value == null)
                         return Integer.MIN_VALUE;
-                else if(((Task)a1).getDueDate().value!=null && ((Task)a2).getDueDate().value!=null)
-                    return ((Task)a1).getDueDate().value.compareTo(((Task)a2).getDueDate().value);}
-                else {if(a1.getClass().getSimpleName().equalsIgnoreCase("event") && a2.getClass().getSimpleName().equalsIgnoreCase("event"))
-                    return ((Event)a1).getStartTime().value.compareTo(((Event)a2).getStartTime().value);}
-                    return a1.getName().toString().compareTo(a2.getName().toString());
+                return ((Task) a1).getDueDate().value.compareTo(((Task) a2).getDueDate().value);}
+                if (a1.getClass().getSimpleName().equalsIgnoreCase("event")
+                        && a2.getClass().getSimpleName().equalsIgnoreCase("event"))
+                    return ((Event) a1).getStartTime().value.compareTo(((Event) a2).getStartTime().value);
+                if (a1.getClass().getSimpleName().equalsIgnoreCase("event")
+                        && a2.getClass().getSimpleName().equalsIgnoreCase("task"))
+                    return ((Event) a1).getStartTime().value.compareTo(((Task) a2).getDueDate().value);
+                if (a1.getClass().getSimpleName().equalsIgnoreCase("task")
+                        && a2.getClass().getSimpleName().equalsIgnoreCase("event"))
+                    return ((Event) a2).getStartTime().value.compareTo(((Task) a1).getDueDate().value);
+                return a1.getName().toString().compareTo(a2.getName().toString());
             }
-        })*/;
+
+        });
+
     }
-    
+
     public ObservableList<Tag> getTag() {
         return tags.getInternalList();
     }
@@ -96,8 +107,8 @@ public class AddressBook implements ReadOnlyLifeKeeper {
     }
 
     public void resetData(Collection<? extends ReadOnlyActivity> newPersons, Collection<Tag> newTags) {
-        List<Activity> activities = newPersons.stream().map(Activity::create).collect(Collectors.toList()); 
-    	setPersons(activities);
+        List<Activity> activities = newPersons.stream().map(Activity::create).collect(Collectors.toList());
+        setPersons(activities);
         setTags(newTags);
         nextReminders.initialize(activities);
     }
@@ -106,32 +117,31 @@ public class AddressBook implements ReadOnlyLifeKeeper {
         resetData(newData.getPersonList(), newData.getTagList());
     }
 
-//// person-level operations
+    //// person-level operations
 
     /**
-     * Adds a person to the address book.
-     * Also checks the new person's tags and updates {@link #tags} with any new tags found,
-     * and updates the Tag objects in the person to point to those in {@link #tags}.
+     * Adds a person to the address book. Also checks the new person's tags and
+     * updates {@link #tags} with any new tags found, and updates the Tag
+     * objects in the person to point to those in {@link #tags}.
      *
-     * @throws UniqueActivityList.DuplicateTaskException if an equivalent person already exists.
+     * @throws UniqueActivityList.DuplicateTaskException
+     *             if an equivalent person already exists.
      */
     public void addPerson(Activity p) throws UniqueActivityList.DuplicateTaskException {
         syncTagsWithMasterList(p);
         activities.addTo(p);
         nextReminders.addReminder(p);
     }
-    
 
-	public void addPerson(int index, Activity activity) throws UniqueActivityList.DuplicateTaskException {
+    public void addPerson(int index, Activity activity) throws UniqueActivityList.DuplicateTaskException {
         syncTagsWithMasterList(activity);
         activities.addAt(index, activity);
         nextReminders.addReminder(activity);
-	}
+    }
 
     /**
-     * Ensures that every tag in this person:
-     *  - exists in the master list {@link #tags}
-     *  - points to a Tag object in the master list
+     * Ensures that every tag in this person: - exists in the master list
+     * {@link #tags} - points to a Tag object in the master list
      */
     private void syncTagsWithMasterList(Activity person) {
         final UniqueTagList personTags = person.getTags();
@@ -159,40 +169,41 @@ public class AddressBook implements ReadOnlyLifeKeeper {
             throw new UniqueActivityList.TaskNotFoundException();
         }
     }
-    
-    //@@author A0125680H
-    public Activity editTask(Activity task, Activity newParams, String type) throws TaskNotFoundException, DuplicateTaskException {
-            if (activities.contains(task)) {
-                Activity newTask = ActivityManager.editUnaffectedParams(task, newParams, type);
-                activities.edit(task, newTask);
-                nextReminders.removeReminder(task);
-                nextReminders.addReminder(newTask);
-                
-                return newTask;
-            } else {
-                throw new UniqueActivityList.TaskNotFoundException();
-            }
+
+    // @@author A0125680H
+    public Activity editTask(Activity task, Activity newParams, String type)
+            throws TaskNotFoundException, DuplicateTaskException {
+        if (activities.contains(task)) {
+            Activity newTask = ActivityManager.editUnaffectedParams(task, newParams, type);
+            activities.edit(task, newTask);
+            nextReminders.removeReminder(task);
+            nextReminders.addReminder(newTask);
+
+            return newTask;
+        } else {
+            throw new UniqueActivityList.TaskNotFoundException();
+        }
     }
 
-	public void markTask(Activity task, boolean isComplete) throws TaskNotFoundException {
+    public void markTask(Activity task, boolean isComplete) throws TaskNotFoundException {
         if (activities.contains(task)) {
             activities.mark(task, isComplete);
         } else {
             throw new UniqueActivityList.TaskNotFoundException();
         }
-	}
-    
-//// tag-level operations
+    }
+
+    //// tag-level operations
 
     public void addTag(Tag t) throws UniqueTagList.DuplicateTagException {
         tags.add(t);
     }
 
-//// util methods
+    //// util methods
 
     @Override
     public String toString() {
-        return activities.getInternalList().size() + " persons, " + tags.getInternalList().size() +  " tags";
+        return activities.getInternalList().size() + " persons, " + tags.getInternalList().size() + " tags";
         // TODO: refine later
     }
 
@@ -216,21 +227,19 @@ public class AddressBook implements ReadOnlyLifeKeeper {
         return this.tags;
     }
 
-
     @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object
                 || (other instanceof AddressBook // instanceof handles nulls
-                && this.activities.equals(((AddressBook) other).activities)
-                && this.tags.equals(((AddressBook) other).tags));
+                        && this.activities.equals(((AddressBook) other).activities)
+                        && this.tags.equals(((AddressBook) other).tags));
     }
 
     @Override
     public int hashCode() {
-        // use this method for custom fields hashing instead of implementing your own
+        // use this method for custom fields hashing instead of implementing
+        // your own
         return Objects.hash(activities, tags);
     }
-
-
 
 }
