@@ -59,13 +59,8 @@ public class AddressBook implements ReadOnlyLifeKeeper {
     //// list overwrite operations
 
     public ObservableList<Activity> getAllEntries() {
-        // activities.getInternalList().sorted(new Comparator<Activity>(){
-        // public int compare (Activity a1, Activity a2){
-        // return
-        // a1.getClass().getSimpleName().compareTo(a2.getClass().getSimpleName());
-        // }
-        // });
-        return activities.getInternalList().sorted(new Comparator<Activity>() {
+        return activities.getInternalList()
+                /*.sorted(new Comparator<Activity>() {
             public int compare(Activity a1, Activity a2) {
                 if (a1.getClass().getSimpleName().equalsIgnoreCase("activity"))
                     return Integer.MAX_VALUE;
@@ -92,10 +87,10 @@ public class AddressBook implements ReadOnlyLifeKeeper {
                         && a2.getClass().getSimpleName().equalsIgnoreCase("event"))
                     return ((Event) a2).getStartTime().value.compareTo(((Task) a1).getDueDate().value);                
                 return a1.getName().toString().compareTo(a2.getName().toString());
-                */
+                
             }
 
-        });
+        })*/;
 
     }
 

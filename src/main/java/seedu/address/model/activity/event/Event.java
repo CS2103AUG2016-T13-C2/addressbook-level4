@@ -125,17 +125,6 @@ public class Event extends Activity implements ReadOnlyEvent{
     }
     
     @Override
-	public Calendar getTimeForComparator() {
-		if (startTime.getCalendarValue() == null) {
-			Calendar latestDate = Calendar.getInstance();
-			latestDate.add(Calendar.YEAR, 99);
-			return latestDate;
-		} else {
-			return startTime.value;
-		}
-    }
-    
-    @Override
     public boolean equals(Object other) {
         if (this == null || other == null) {
             return !(this == null ^ other == null);

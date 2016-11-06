@@ -112,19 +112,6 @@ public class Task extends Activity implements ReadOnlyTask {
     }
     
     @Override
-	public Calendar getTimeForComparator() {
-		if (duedate.getCalendarValue() == null) {
-			Calendar latestDate = Calendar.getInstance();
-			latestDate.add(Calendar.YEAR, 99);
-			return latestDate;
-		} else {
-			return duedate.value;
-		}
-
-	}
-
-    
-    @Override
     public boolean equals(Object other) {
         if (this == null || other == null) {
             return !(this == null ^ other == null);

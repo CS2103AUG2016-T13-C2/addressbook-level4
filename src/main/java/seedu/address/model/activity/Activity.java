@@ -145,10 +145,5 @@ public class Activity implements ReadOnlyActivity {
         return false;
     }
 
-	public Calendar getTimeForComparator() {
-		Calendar latestDate = Calendar.getInstance();
-		latestDate.add(Calendar.YEAR, 99);
-		return latestDate;
-	}
 
 }
