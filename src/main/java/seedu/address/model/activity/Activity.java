@@ -9,6 +9,7 @@ import seedu.address.model.activity.task.ReadOnlyTask;
 import seedu.address.model.activity.task.Task;
 import seedu.address.model.tag.UniqueTagList;
 
+import java.util.Calendar;
 import java.util.Objects;
 
 /**
@@ -143,5 +144,11 @@ public class Activity implements ReadOnlyActivity {
     public boolean getisOver() {
         return false;
     }
+
+	public Calendar getTimeForComparator() {
+		Calendar latestDate = Calendar.getInstance();
+		latestDate.add(Calendar.YEAR, 99);
+		return latestDate;
+	}
 
 }

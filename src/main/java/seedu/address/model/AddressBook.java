@@ -71,7 +71,11 @@ public class AddressBook implements ReadOnlyLifeKeeper {
                     return Integer.MAX_VALUE;
                 if (a2.getClass().getSimpleName().equalsIgnoreCase("activity"))
                     return Integer.MIN_VALUE;
-                if (a1.getClass().getSimpleName().equalsIgnoreCase("task")
+                
+                return a1.getTimeForComparator().compareTo(a2.getTimeForComparator());
+                
+                /*
+                 * if (a1.getClass().getSimpleName().equalsIgnoreCase("task")
                         && a2.getClass().getSimpleName().equalsIgnoreCase("task"))
                     {if (((Task) a1).getDueDate().value == null)
                         return Integer.MAX_VALUE;
@@ -86,8 +90,9 @@ public class AddressBook implements ReadOnlyLifeKeeper {
                     return ((Event) a1).getStartTime().value.compareTo(((Task) a2).getDueDate().value);
                 if (a1.getClass().getSimpleName().equalsIgnoreCase("task")
                         && a2.getClass().getSimpleName().equalsIgnoreCase("event"))
-                    return ((Event) a2).getStartTime().value.compareTo(((Task) a1).getDueDate().value);
+                    return ((Event) a2).getStartTime().value.compareTo(((Task) a1).getDueDate().value);                
                 return a1.getName().toString().compareTo(a2.getName().toString());
+                */
             }
 
         });

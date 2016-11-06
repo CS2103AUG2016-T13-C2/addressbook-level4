@@ -6,6 +6,7 @@ import java.util.Objects;
 
 import seedu.address.commons.util.CollectionUtil;
 import seedu.address.model.activity.Activity;
+import seedu.address.model.activity.DateTime;
 import seedu.address.model.activity.Name;
 import seedu.address.model.activity.ReadOnlyActivity;
 import seedu.address.model.activity.Reminder;
@@ -109,6 +110,18 @@ public class Task extends Activity implements ReadOnlyTask {
             return duedate.isBeforeNow();     
         }
     }
+    
+    @Override
+	public Calendar getTimeForComparator() {
+		if (duedate.getCalendarValue() == null) {
+			Calendar latestDate = Calendar.getInstance();
+			latestDate.add(Calendar.YEAR, 99);
+			return latestDate;
+		} else {
+			return duedate.value;
+		}
+
+	}
 
     
     @Override
