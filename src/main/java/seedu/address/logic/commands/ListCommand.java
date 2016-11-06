@@ -36,7 +36,7 @@ public class ListCommand extends Command {
           return new CommandResult(MESSAGE_SUCCESS_ACT);
       
       case "task":
-    	  model.updateSortedListToShowAll();
+    	  model.updateFilteredTaskListToShowAll();
           return new CommandResult(MESSAGE_SUCCESS_TASK);
        
 

@@ -153,20 +153,6 @@ public class ModelManager extends ComponentManager implements Model {
         filteredEntries.setPredicate(p -> p.getCompletionStatus() == false && p.getisOver() == false);
     }
 
-    public void updateSortedListToShowAll() {
-        SortedList<Activity> sortEntries = new SortedList<>(addressBook.getAllEntries());
-        Collections.sort(sortEntries, new Comparator<Activity>(){
-            public int compare (Activity a1, Activity a2){
-                if(a1.getClass().getSimpleName().equalsIgnoreCase("task"))
-                    return ((Task)a1).getDueDate().value.compareTo(((Task)a2).getDueDate().value);
-                else 
-                    return a1.getName().toString().compareTo(a2.getName().toString());
-            }
-        });
-        filteredEntries = new FilteredList<>(sortEntries);
-        filteredEntries.setPredicate(p -> p.getClass().getSimpleName().equalsIgnoreCase("Task"));
-    }
-
     @Override
     public void updateFilteredByTagListToShowAll(String tag) {
         filteredEntries.setPredicate(p -> p.getTags().contains1(tag));

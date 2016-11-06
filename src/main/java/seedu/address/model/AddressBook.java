@@ -10,6 +10,7 @@ import seedu.address.model.activity.UniqueActivityList.DuplicateTaskException;
 import seedu.address.model.activity.UniqueActivityList.TaskNotFoundException;
 import seedu.address.model.activity.UpcomingReminders;
 import seedu.address.model.activity.task.Task;
+import seedu.address.model.activity.event.Event;
 import seedu.address.model.tag.Tag;
 import seedu.address.model.tag.UniqueTagList;
 import seedu.address.storage.XmlAdaptedTag;
@@ -57,7 +58,20 @@ public class AddressBook implements ReadOnlyLifeKeeper {
 //// list overwrite operations
 
     public ObservableList<Activity> getAllEntries() {
-        return activities.getInternalList();
+        activities.getInternalList().sorted(new Comparator<Activity>(){
+            public int compare (Activity a1, Activity a2){
+            return a1.getClass().getSimpleName().compareTo(a2.getClass().getSimpleName());
+            }
+        });
+        return  activities.getInternalList().sorted(new Comparator<Activity>(){
+            public int compare (Activity a1, Activity a2){
+                if(a1.getClass().getSimpleName().equalsIgnoreCase("task")&&a2.getClass().getSimpleName().equalsIgnoreCase("task"))
+                    return ((Task)a1).getDueDate().value.compareTo(((Task)a2).getDueDate().value);
+                else if(a1.getClass().getSimpleName().equalsIgnoreCase("event") && a2.getClass().getSimpleName().equalsIgnoreCase("event"))
+                    return ((Event)a1).getStartTime().value.compareTo(((Event)a2).getStartTime().value);
+                    return a1.getName().toString().compareTo(a2.getName().toString());
+            }
+        });
     }
     
     public ObservableList<Tag> getTag() {

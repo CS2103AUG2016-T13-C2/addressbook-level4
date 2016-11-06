@@ -65,7 +65,6 @@ public interface Model {
 
     void updateFilteredDoneListToShowAll();
 
-    public void updateSortedListToShowAll();
 
     
 }
