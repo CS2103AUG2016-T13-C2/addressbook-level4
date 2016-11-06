@@ -36,7 +36,7 @@ public class ModelManager extends ComponentManager implements Model {
     private static final Logger logger = LogsCenter.getLogger(ModelManager.class);
 
     private final AddressBook addressBook;
-    private final FilteredList<Activity> filteredEntries;
+    private FilteredList<Activity> filteredEntries;
     private final FilteredList<Tag> filteredTags;
 
     /**
@@ -154,15 +154,17 @@ public class ModelManager extends ComponentManager implements Model {
     }
 
     public void updateSortedListToShowAll() {
-        filteredEntries.setPredicate(p -> p.getClass().getSimpleName().equalsIgnoreCase("Task"));
-        Collections.sort(filteredEntries, new Comparator<Activity>(){
+        SortedList<Activity> sortEntries = new SortedList<>(addressBook.getAllEntries());
+        Collections.sort(sortEntries, new Comparator<Activity>(){
             public int compare (Activity a1, Activity a2){
                 if(a1.getClass().getSimpleName().equalsIgnoreCase("task"))
-                return ((Task)a1).getDueDate().value.compareTo(((Task)a2).getDueDate().value);
+                    return ((Task)a1).getDueDate().value.compareTo(((Task)a2).getDueDate().value);
                 else 
                     return a1.getName().toString().compareTo(a2.getName().toString());
             }
         });
+        filteredEntries = new FilteredList<>(sortEntries);
+        filteredEntries.setPredicate(p -> p.getClass().getSimpleName().equalsIgnoreCase("Task"));
     }
 
     @Override
