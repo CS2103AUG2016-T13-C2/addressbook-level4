@@ -139,7 +139,8 @@ public class ModelManager extends ComponentManager implements Model {
 
     @Override
     public UnmodifiableObservableList<ReadOnlyActivity> getFilteredTaskList() {
-        return new UnmodifiableObservableList<>(filteredEntries);
+        filteredEntries.setPredicate(p -> p.getCompletionStatus() == false && p.getisOver() == false);
+    	return new UnmodifiableObservableList<>(filteredEntries);
     }
 
     @Override
